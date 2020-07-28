@@ -1,4 +1,4 @@
 Para iniciar o projeto
-execute -> yarn start
+execute -> yarn e depois yarn start
 para executar api fake
 -> json-server --watch db.json -p 3334
