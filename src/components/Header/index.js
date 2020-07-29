@@ -27,7 +27,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import Collapse from '@material-ui/core/Collapse';
 import BuildIcon from '@material-ui/icons/Build';
 // import { format, parseISO } from 'date-fns';
 
@@ -520,7 +520,27 @@ function Header() {
               </MuiPickersUtilsProvider>
             </Calendar>
             <FormControl className={classes.formControl}>
-              <InputLabel id="demo-mutiple-checkbox-label">Marcas</InputLabel>
+              <InputLabel id="demo-mutiple-che3ckbox-label">Marcas</InputLabel>
+              <Select
+                labelId="demo-mutiple-checkbox-label"
+                id="demo-mutiple-checkbox"
+                multiple
+                value={group}
+                onChange={handleChange}
+                input={<Input />}
+                renderValue={selected => selected.join(', ')}
+                MenuProps={MenuProps}
+              >
+                {regionlist.map(name => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={region.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-mutiple-checkbox-label">Grupos</InputLabel>
               <Select
                 labelId="demo-mutiple-checkbox-label"
                 id="demo-mutiple-checkbox"
@@ -535,12 +555,25 @@ function Header() {
                   <MenuItem key={name} value={name}>
                     <Checkbox checked={group.indexOf(name) > -1} />
                     <ListItemText primary={name} />
+
+                    <Collapse
+                      unmountOnExit
+                      in={group.indexOf(name) > -1 || false}
+                      timeout="auto"
+                    >
+                      {/* {names.map(name => ( */}
+
+                      <Checkbox checked={group.indexOf(name) > -1} />
+                      <ListItemText primary={name} />
+
+                      {/* ))} */}
+                    </Collapse>
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
-              <InputLabel id="demo-mutiple-checkbox-label">Regiões</InputLabel>
+              <InputLabel id="demo-mutiple-che3ckbox-label">Regiões</InputLabel>
               <Select
                 labelId="demo-mutiple-checkbox-label"
                 id="demo-mutiple-checkbox"

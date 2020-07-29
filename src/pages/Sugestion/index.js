@@ -74,9 +74,15 @@ const useStyles = makeStyles(theme => ({
     width: 130,
     height: 40,
   },
-  input: {
+  firstinput: {
     textAlign: 'center',
     width: 130,
+    height: 40,
+  },
+
+  input: {
+    textAlign: 'center',
+    width: 40,
     height: 40,
   },
 }));
@@ -119,7 +125,7 @@ const CustomTableCell = ({ row, name, onChange, index }) => {
             value={row[name]}
             name={name}
             onChange={e => onChange(e, row)}
-            className={classes.input}
+            className={index === 1 ? classes.firstinput : classes.input}
           />
         ) : (
           row[name]

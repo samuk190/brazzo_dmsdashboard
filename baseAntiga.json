@@ -1,0 +1,22 @@
+{
+  "brands": [
+    { "dealerships": [ { "id": 1, "brand_id":1, "name": "Piracicaba", "value": 11,"objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },{ "id": 2, "brand_id":1, "value": 14, "name": "Bauru", "objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" } ], "id": 1,"dealership": 3, "name": "Volvo","value":50, "objective":50,"targetObjective":50,"maxObjective": 20,"urlImage":"https://logodownload.org/wp-content/uploads/2017/10/volvo-logo.png", "author": "typicode" },
+    { "dealerships": [ { "id": 2, "brand_id":1, "name": "Sao Paulo", "value": 10,"objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },{ "id": 2, "brand_id":1, "name": "Sorocaba", "value":10,"objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },{ "id": 2, "brand_id":1, "name": "Avaré", "value":5,"objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" } ], "id": 1,"dealership": 3, "name": "Renault","value":50, "objective":50,"targetObjective":50,"maxObjective": 20,"urlImage":"https://logodownload.org/wp-content/uploads/2017/10/volvo-logo.png", "author": "typicode" },
+    { "dealerships": [ { "id": 3, "brand_id":1, "name": "Rio de Janeiro", "value": 25,"objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },{ "id": 2, "brand_id":1, "name": "Bauru", "objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" } ], "id": 1,"dealership": 3, "name": "Hyundai","value":50, "objective":50,"targetObjective":50,"maxObjective": 20,"urlImage":"https://logodownload.org/wp-content/uploads/2017/10/volvo-logo.png", "author": "typicode" },
+      { "dealerships": [ { "id": 3, "brand_id":1, "name": "Rio de Janeiro", "value": 25,"objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },{ "id": 2, "brand_id":1, "name": "Bauru", "objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" } ], "id": 1,"dealership": 3, "name": "Hyundai","value":50, "objective":50,"targetObjective":50,"maxObjective": 20,"urlImage":"https://logodownload.org/wp-content/uploads/2017/10/volvo-logo.png", "author": "typicode" }
+
+
+
+    
+  ],
+  "dealerships": [
+    { "id": 1, "brand_id":1, "title": "Piracicaba", "objective":25,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },
+    { "id": 1, "brand_id":1, "title": "Avaré", "objective":15,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },
+    { "id": 1, "brand_id":1, "title": "Itapecerica", "objective":13,"targetObjective":15,"maxObjective":25,"postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },
+    { "id": 2,"brand_id":2, "title": "São Paulo","objective":4,"targetObjective":5,"maxObjective": 13, "postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png"},
+    { "id": 3,"brand_id":3, "title": "Itapetininga","objective":2,"targetObjective":5,"maxObjective": 13, "postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },
+    { "id": 4,"brand_id":1, "title": "Sorocaba","objective":3,"targetObjective":5,"maxObjective": 20, "postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" },
+    { "id": 5, "brand_id":2,"title": "Bauru","objective":9,"targetObjective":5,"maxObjective": 13, "postId": 1,"urlImage":"https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png" }
+  ],
+  "profile": { "name": "typicode" }
+}
