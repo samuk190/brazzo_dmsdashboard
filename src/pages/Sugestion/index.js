@@ -48,17 +48,29 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     justifyContent: 'center',
     minWidth: 650,
+
+    borderCollapse: 'separate',
   },
   selectTableCell: {
     textAlign: 'center',
     alignSelf: 'center',
+
     width: 60,
   },
   tableRow: {
     textAlign: 'center',
   },
+  tableth: {
+    fontSize: '20px',
+    // border: '1px solid #CBC8BF',
+  },
+  tabletd: {
+    width: 200,
+    // border: '1px solid #CBC8BF',
+  },
   tableCell: {
     textAlign: 'center',
+    // border: '1px solid #CBC8BF',
     width: 130,
     height: 40,
   },
@@ -92,12 +104,16 @@ const createData = (
   isEditMode: false,
 });
 
-const CustomTableCell = ({ row, name, onChange }) => {
+const CustomTableCell = ({ row, name, onChange, index }) => {
   const classes = useStyles();
   const { isEditMode } = row;
+  // console.log(row);
   return (
     <>
-      <TableCell align="center" className={classes.tableCell}>
+      <TableCell
+        align="center"
+        className={index === 1 ? classes.tabletd : classes.tableCell}
+      >
         {isEditMode ? (
           <Input
             value={row[name]}
@@ -228,7 +244,7 @@ function Sugestion() {
           format: [`${rows.length * 125}`, 1000],
         }}
         targetRef={ref}
-        filename="code-example.pdf"
+        filename="tabela-sugestao.pdf"
       >
         {({ toPdf }) => (
           <Button
@@ -248,21 +264,49 @@ function Sugestion() {
           <caption>Tabela - Sugestão de Pedidos</caption>
           <TableHead>
             <TableRow>
+              <TableCell className={classes.tableth} colspan="2" align="center">
+                PRODUTOS
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Cod Lust
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Cod Loja
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Qtd Und Caixa
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Valor unitario
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Demanda
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Quantidade Sugerida
+              </TableCell>
+              <TableCell className={classes.tableth} align="center">
+                Valor Total
+              </TableCell>
               <TableCell align="center" />
-              <TableCell align="center" />
-              <TableCell align="center">Nome Serviço</TableCell>
-              <TableCell align="center">Cod Lust</TableCell>
-              <TableCell align="center">Cod Loja</TableCell>
-              <TableCell align="center">Qtd Und Caixa</TableCell>
-              <TableCell align="center">Valor unitario</TableCell>
-              <TableCell align="center">Demanda</TableCell>
-              <TableCell align="center">Quantidade Sugerida</TableCell>
-              <TableCell align="center">Valor Total</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map(row => (
               <TableRow key={row.id}>
+                <TableCell className={classes.tableth}>
+                  <img src={row.logof} width="100" height="100" alt="teste" />
+                </TableCell>
+                <CustomTableCell
+                  {...{ index: 1, row, name: 'name', onChange }}
+                />
+                <CustomTableCell {...{ row, name: 'calories', onChange }} />
+                <CustomTableCell {...{ row, name: 'fat', onChange }} />
+                <CustomTableCell {...{ row, name: 'carbs', onChange }} />
+                <CustomTableCell {...{ row, name: 'protein', onChange }} />
+                <CustomTableCell {...{ row, name: 'teste', onChange }} />
+                <CustomTableCell {...{ row, name: 'testef', onChange }} />
+                <CustomTableCell {...{ row, name: 'tested', onChange }} />
                 <TableCell className={classes.selectTableCell}>
                   {row.isEditMode ? (
                     <>
@@ -288,17 +332,6 @@ function Sugestion() {
                     </IconButton>
                   )}
                 </TableCell>
-                <TableCell>
-                  <img src={row.logof} width="100" height="100" alt="teste" />
-                </TableCell>
-                <CustomTableCell {...{ row, name: 'name', onChange }} />
-                <CustomTableCell {...{ row, name: 'calories', onChange }} />
-                <CustomTableCell {...{ row, name: 'fat', onChange }} />
-                <CustomTableCell {...{ row, name: 'carbs', onChange }} />
-                <CustomTableCell {...{ row, name: 'protein', onChange }} />
-                <CustomTableCell {...{ row, name: 'teste', onChange }} />
-                <CustomTableCell {...{ row, name: 'testef', onChange }} />
-                <CustomTableCell {...{ row, name: 'tested', onChange }} />
               </TableRow>
             ))}
           </TableBody>
