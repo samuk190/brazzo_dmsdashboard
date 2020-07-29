@@ -57,6 +57,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   brands,
+  groups,
   regions,
   dateInitial,
   dateFinal,
@@ -98,7 +99,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Header() {
-  const [group, setGroupName] = useRecoilState(brands);
+  const [brand, setBrand] = useRecoilState(brands);
+
+  const [group, setGroup] = useRecoilState(groups);
 
   const [names, setNames] = useRecoilState(listbrands);
   const [region, setRegionName] = useRecoilState(regions);
@@ -116,7 +119,10 @@ function Header() {
     setRegionName(event.target.value);
   };
   const handleChange = event => {
-    setGroupName(event.target.value);
+    setBrand(event.target.value);
+  };
+  const handleChangeGroup = event => {
+    setGroup(event.target.value);
   };
   // let names = ['Todos'];
 
@@ -124,17 +130,22 @@ function Header() {
     async function loadData() {
       const datab = await api.get('brands');
 
-      const title = datab.data.map(function(group) {
-        return group.name;
+      const brand = datab.data.map(function(brand) {
+        return brand;
       });
       // console.log(title);
-
-      setNames(['Todos', ...title]);
+      // const groups = datab.data.map(function(brand) {
+      //   console.log(brand.groups.name);
+      //   return brand.groups.name;
+      // });
+      // setGroup(groups);
+      // console.log(groups);
+      setNames([{ name: 'Todos' }, ...brand]);
     }
     loadData();
   }, [setNames]);
 
-  // const names = group.title;
+  // const names = brand.title;
 
   // const names = [
   //   'Todos',
@@ -525,16 +536,16 @@ function Header() {
                 labelId="demo-mutiple-checkbox-label"
                 id="demo-mutiple-checkbox"
                 multiple
-                value={group}
+                value={brand}
                 onChange={handleChange}
                 input={<Input />}
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
               >
-                {regionlist.map(name => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked={region.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
+                {names.map(name => (
+                  <MenuItem key={name.name} value={name.name}>
+                    <Checkbox checked={brand.indexOf(name.name) > -1} />
+                    <ListItemText primary={name.name} />
                   </MenuItem>
                 ))}
               </Select>
@@ -546,30 +557,36 @@ function Header() {
                 id="demo-mutiple-checkbox"
                 multiple
                 value={group}
-                onChange={handleChange}
+                onChange={handleChangeGroup}
                 input={<Input />}
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
               >
-                {names.map(name => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked={group.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
+                {names.map(namef => [
+                  namef.groups
+                    ? namef.groups.map(name => [
+                        <MenuItem key={name.name} value={name.name}>
+                          <Checkbox checked={group.indexOf(name.name) > -1} />
+                          <ListItemText primary={name.name} />
 
-                    <Collapse
-                      unmountOnExit
-                      in={group.indexOf(name) > -1 || false}
-                      timeout="auto"
-                    >
-                      {/* {names.map(name => ( */}
-
-                      <Checkbox checked={group.indexOf(name) > -1} />
-                      <ListItemText primary={name} />
-
-                      {/* ))} */}
-                    </Collapse>
-                  </MenuItem>
-                ))}
+                          <Collapse
+                            unmountOnExit
+                            in={group.indexOf(name.name) > -1 || false}
+                            timeout="auto"
+                          >
+                            {name.dealerships.map(dealership => [
+                              <MenuItem key={name.name} value={name.name}>
+                                <Checkbox
+                                  checked={group.indexOf(dealership.name) > -1}
+                                />
+                                <ListItemText primary={dealership.name} />
+                              </MenuItem>,
+                            ])}
+                          </Collapse>
+                        </MenuItem>,
+                      ])
+                    : '',
+                ])}
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>

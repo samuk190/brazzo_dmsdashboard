@@ -1,6 +1,15 @@
 {
   "brands": [
     {
+      "id": 1,
+      "dealership": 3,
+      "name": "Volvo",
+      "value": 50,
+      "objective": 50,
+      "targetObjective": 50,
+      "maxObjective": 20,
+      "urlImage": "https://logodownload.org/wp-content/uploads/2017/10/volvo-logo.png",
+      "author": "typicode",
       "groups": [
         {
           "name": "Grupo Prime",
@@ -30,12 +39,12 @@
           ]
         },
         {
-          "name": "Grupo Piracicaba",
+          "name": "Grupo Sao Paulo",
           "dealerships": [
             {
               "id": 1,
               "brand_id": 1,
-              "name": "Piracicaba",
+              "name": "Sao Paulo",
               "value": 11,
               "objective": 25,
               "targetObjective": 15,
@@ -46,12 +55,12 @@
           ]
         },
         {
-          "name": "Grupo Piracicaba",
+          "name": "Grupo Bauru",
           "dealerships": [
             {
               "id": 1,
               "brand_id": 1,
-              "name": "Piracicaba",
+              "name": "Bauru",
               "value": 11,
               "objective": 25,
               "targetObjective": 15,
@@ -62,12 +71,12 @@
           ]
         },
         {
-          "name": "Grupo Piracicaba",
+          "name": "Grupo Terra nova",
           "dealerships": [
             {
               "id": 1,
               "brand_id": 1,
-              "name": "Piracicaba",
+              "name": "Terra Nova",
               "value": 11,
               "objective": 25,
               "targetObjective": 15,
@@ -78,7 +87,6 @@
           ]
         }
       ]
-      
     }
   ]
 }

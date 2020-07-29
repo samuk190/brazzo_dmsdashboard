@@ -14,6 +14,14 @@ export const brands = atom({
     type: 'brands',
   }, // default value (aka initial value)
 });
+
+export const groups = atom({
+  key: 'groups', // unique ID (with respect to other atoms/selectors)
+  default: [],
+  persistence_UNSTABLE: {
+    type: 'groups',
+  }, // default value (aka initial value)
+});
 export const regions = atom({
   key: 'regions', // unique ID (with respect to other atoms/selectors)
   default: ['Todos'],
