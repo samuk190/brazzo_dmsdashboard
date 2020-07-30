@@ -4,7 +4,7 @@ para executar api fake
 -> json-server --watch db.json -p 3334
 
 
-Imagens atuais: 
+Imagens atuais: <br>
 Menu lateral(Refeito):
 <p align="center">
   <img src="https://i.imgur.com/UicZ7tO.png" width="350" title="hover text">
