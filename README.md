@@ -14,7 +14,7 @@ Sugestão de Pedidos (Exportar Funcional):
   <img src="https://i.imgur.com/1Bw8uUw.png" width="350" title="hover text">
 </p>
 
-Ranking (Exportar Funcional):
+Ranking:
 <p align="center">
   <img src="https://i.imgur.com/lpT8GGh.png" width="350" title="hover text">
 </p>
