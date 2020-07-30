@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MultilevelSidebar from 'react-multilevel-sidebar';
+import Button from '@material-ui/core/Button';
 // import { IconButton } from 'rea';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
@@ -56,6 +58,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
+  dealerships,
+  listdealerships,
   brands,
   groups,
   regions,
@@ -100,9 +104,11 @@ const useStyles = makeStyles(theme => ({
 
 function Header() {
   const [brand, setBrand] = useRecoilState(brands);
-
+  const [arrayVazio, setArrayVazio] = useState([]);
   const [group, setGroup] = useRecoilState(groups);
-
+  const [dealership, setDealership] = useRecoilState(dealerships);
+  const [openlist, setOpenList] = useState(false);
+  const [listdealership, setListDealership] = useRecoilState(listdealerships);
   const [names, setNames] = useRecoilState(listbrands);
   const [region, setRegionName] = useRecoilState(regions);
   const [regionlist, setRegionList] = useRecoilState(listregions);
@@ -114,7 +120,9 @@ function Header() {
     bottom: false,
     right: false,
   });
-
+  function handleOpenList(grouoOpen) {
+    setOpenList(!openlist);
+  }
   const handleChangeRegion = event => {
     setRegionName(event.target.value);
   };
@@ -124,15 +132,38 @@ function Header() {
   const handleChangeGroup = event => {
     setGroup(event.target.value);
   };
+  const handleChangeList = event => {
+    if (event !== '') {
+      setListDealership(event.target.value);
+    }
+  };
   // let names = ['Todos'];
 
   React.useEffect(() => {
     async function loadData() {
       const datab = await api.get('brands');
 
-      const brand = datab.data.map(function(brand) {
+      const brand = await datab.data.map(function(brand) {
         return brand;
       });
+
+      const groupx = await brand.map(function(group) {
+        return group.groups;
+      });
+
+      // const dealershipx = await groupx.map(function(dealershipv) {
+      //   console.log(dealershipv);
+      //   return dealershipv.name;
+      // });
+      const dealershipx = groupx.map(function(dealershipv) {
+        console.log(dealershipv);
+        return dealershipv.map(entity => entity.dealerships);
+      });
+      // dealershipx.map(function(dealershipb) {
+      //   console.log(dealershipb);
+      //   return dealershipb;
+      // });
+      setDealership(dealershipx);
       // console.log(title);
       // const groups = datab.data.map(function(brand) {
       //   console.log(brand.groups.name);
@@ -172,13 +203,24 @@ function Header() {
   // };
   // Temas
 
-  const ITEM_HEIGHT = 48;
+  const ITEM_HEIGHT = 200;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
     PaperProps: {
       style: {
         maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
         width: 250,
+      },
+    },
+  };
+  const MenuPropsList = {
+    PaperProps: {
+      style: {
+        maxHeight: 50 * 4.5 + 12,
+        minWidth: 200,
+        width: 250,
+        marginLeft: 60,
+        // borderRadius: 100,
       },
     },
   };
@@ -562,28 +604,91 @@ function Header() {
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
               >
-                {names.map(namef => [
-                  namef.groups
-                    ? namef.groups.map(name => [
-                        <MenuItem key={name.name} value={name.name}>
-                          <Checkbox checked={group.indexOf(name.name) > -1} />
-                          <ListItemText primary={name.name} />
-
-                          <Collapse
-                            unmountOnExit
-                            in={group.indexOf(name.name) > -1 || false}
-                            timeout="auto"
+                <MenuItem disabled value="">
+                  <em>Grupos</em>
+                </MenuItem>
+                {names.map(TopEntity => [
+                  TopEntity.groups
+                    ? TopEntity.groups.map(entity => [
+                        <MenuItem key={entity.name} value={entity.name}>
+                          <Checkbox checked={group.indexOf(entity.name) > -1} />
+                          <ListItemText primary={entity.name} />
+                          <Select
+                            labelId="demo-mutiple-checkbox-label"
+                            id="demo-mutiple-checkbox2"
+                            disableUnderline
+                            // IconComponent={() => <ArrowForwardIosIcon />}
+                            multiple
+                            // onOpen={handleOpenList}
+                            value={listdealership}
+                            onChange={handleChangeList}
+                            input={
+                              <Input />
+                              // <Button size="large" onClick={handleChangeList} />
+                            }
+                            displayEmpty
+                            renderValue={selected => selected === ''}
+                            // readOnly
+                            MenuProps={MenuPropsList}
                           >
-                            {name.dealerships.map(dealership => [
-                              <MenuItem key={name.name} value={name.name}>
+                            <MenuItem disabled value="">
+                              <em>Concessionárias</em>
+                            </MenuItem>
+                            {entity.dealerships.map(dealers => [
+                              <MenuItem key={dealers.name} value={dealers.name}>
                                 <Checkbox
-                                  checked={group.indexOf(dealership.name) > -1}
+                                  checked={
+                                    listdealership.indexOf(dealers.name) > -1
+                                  }
                                 />
-                                <ListItemText primary={dealership.name} />
+                                <ListItemText primary={dealers.name} />
                               </MenuItem>,
                             ])}
-                          </Collapse>
+                          </Select>
                         </MenuItem>,
+                        // <Collapse
+                        //   unmountOnExit
+                        //   in={group.indexOf(entity.name) > -1 || false}
+                        //   timeout="auto"
+                        // >
+                        // {
+                        /* <Select
+                            labelId="demo-mutiple-checkbox-label"
+                            id="demo-mutiple-checkbox2"
+                            multiple
+                            displayEmpty
+                            // onOpen={handleOpenList}
+                            value={listdealership}
+                            onChange={handleChangeList}
+                            input={<Input />}
+                            renderValue={selected => selected.join(', ')}
+                            MenuProps={MenuPropsList}
+                          >
+                            <MenuItem disabled value="">
+                              <em>Concessionárias</em>
+                            </MenuItem>
+                            {entity.dealerships.map(dealers => [
+                              <MenuItem
+                                // open={false}
+                                // onOpen={() =>
+                                //   handleOpenList(
+                                //     listdealership.indexOf(dealers.name) > -1
+                                //   )
+                                // }
+                                key={dealers.name}
+                                value={dealers.name}
+                              >
+                                <Checkbox
+                                  checked={
+                                    listdealership.indexOf(dealers.name) > -1
+                                  }
+                                />
+                                <ListItemText primary={dealers.name} />
+                              </MenuItem>,
+                            ])}
+                          </Select> */
+                        // },
+                        // </Collapse>,
                       ])
                     : '',
                 ])}

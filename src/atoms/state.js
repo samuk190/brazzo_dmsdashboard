@@ -14,7 +14,20 @@ export const brands = atom({
     type: 'brands',
   }, // default value (aka initial value)
 });
-
+export const dealerships = atom({
+  key: 'dealerships', // unique ID (with respect to other atoms/selectors)
+  default: [],
+  persistence_UNSTABLE: {
+    type: 'dealerships',
+  }, // default value (aka initial value)
+});
+export const listdealerships = atom({
+  key: 'listdealerships', // unique ID (with respect to other atoms/selectors)
+  default: [],
+  persistence_UNSTABLE: {
+    type: 'listdealerships',
+  }, // default value (aka initial value)
+});
 export const groups = atom({
   key: 'groups', // unique ID (with respect to other atoms/selectors)
   default: [],
