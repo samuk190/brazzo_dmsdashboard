@@ -2,3 +2,11 @@ Para iniciar o projeto
 execute -> yarn e depois yarn start
 para executar api fake
 -> json-server --watch db.json -p 3334
+
+
+Imagens atuais: 
+Menu lateral(Refeito):
+![alt text](http://prntscr.com/trdhcv)
+
+Sugestão de Pedidos (Exportar Funcional):
+![alt text](http://prntscr.com/trdhpx)
