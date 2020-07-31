@@ -21,6 +21,13 @@ export const dealerships = atom({
     type: 'dealerships',
   }, // default value (aka initial value)
 });
+export const searchFilter = atom({
+  key: 'searchfilter', // unique ID (with respect to other atoms/selectors)
+  default: [],
+  persistence_UNSTABLE: {
+    type: 'searchfilter',
+  }, // default value (aka initial value)
+});
 export const listdealerships = atom({
   key: 'listdealerships', // unique ID (with respect to other atoms/selectors)
   default: [],

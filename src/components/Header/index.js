@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MultilevelSidebar from 'react-multilevel-sidebar';
 import Button from '@material-ui/core/Button';
 // import { IconButton } from 'rea';
+import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import Grid from '@material-ui/core/Grid';
@@ -32,7 +33,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import Collapse from '@material-ui/core/Collapse';
 import BuildIcon from '@material-ui/icons/Build';
 // import { format, parseISO } from 'date-fns';
-
+// import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
 import {
   makeStyles,
   createMuiTheme,
@@ -45,7 +48,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // pick a date util library
 // import MomentUtils from '@date-io/moment';
 import 'date-fns';
@@ -58,6 +62,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
+  searchFilter,
   dealerships,
   listdealerships,
   brands,
@@ -103,6 +108,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Header() {
+  const [values, setValues] = useRecoilState(searchFilter);
+  const handleClickShowPassword = () => {
+    // setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+  const searchFocus = React.useRef(null);
+
   const [brand, setBrand] = useRecoilState(brands);
   const [arrayVazio, setArrayVazio] = useState([]);
   const [group, setGroup] = useRecoilState(groups);
@@ -128,12 +143,22 @@ function Header() {
   };
   const handleChange = event => {
     setBrand(event.target.value);
+    event.preventDefault();
+  };
+  const handleChangeSearch = event => {
+    // setValues({ ...values, [prop]: event.target.value });
+    searchFocus.current.focus();
+    setValues(event.target.value);
+    event.preventDefault();
+    searchFocus.current.focus();
   };
   const handleChangeGroup = event => {
-    setGroup(event.target.value);
+    if (event !== null || event !== '') {
+      setGroup(event.target.value);
+    }
   };
   const handleChangeList = event => {
-    if (event !== '') {
+    if (event !== null || event !== '') {
       setListDealership(event.target.value);
     }
   };
@@ -242,18 +267,52 @@ function Header() {
   const handleDateChangeFinal = date => {
     setFinalDate(date);
   };
+  const styleSearch = {
+    color: '#909090',
+    marginTop: 5,
+    marginRight: 10,
+  };
+  const inputSearchStyle = {
+    primary: {
+      color: '#000',
+      textColor: '#000',
+    },
+    secondary: {
+      color: '#000',
+      textColor: '#000',
+    },
+    colorPrimary: {
+      textColor: '#000',
+      color: '#000',
+    },
+    color: 'black',
+    textColor: 'black',
+  };
   const [darkState, setDarkState] = useState(false);
   const palletType = darkState ? 'light' : 'dark';
   const darkTheme = createMuiTheme({
+    formText: {
+      color: '#000',
+    },
+    formLabelFocused: {
+      color: '#000',
+    },
     overrides: {
       MuiPickersInput: {
         input: {
           color: '#FFF',
         },
       },
+
       MuiInputLabel: {
         root: {
           color: '#FFF',
+        },
+      },
+      MuiInputInputTypeSearch: {
+        root: {
+          color: '#000',
+          textColor: '#000',
         },
       },
       MuiInputBase: {
@@ -594,6 +653,7 @@ function Header() {
             </FormControl>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-mutiple-checkbox-label">Grupos</InputLabel>
+
               <Select
                 labelId="demo-mutiple-checkbox-label"
                 id="demo-mutiple-checkbox"
@@ -604,55 +664,116 @@ function Header() {
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
               >
-                <MenuItem disabled value="">
-                  <em>Grupos</em>
-                </MenuItem>
+                {/* <MenuItem disabled value="">
+              <em>Grupos</em>
+            </MenuItem> */}
+
+                <ListItem value="">
+                  {/* <InputLabel
+                    style={styleSearch}
+                    // FormLabelClasses={{
+                    //   root: classes.formText,
+                    //   focused: classes.formLabelFocused,
+                    // }}
+                    htmlFor="standard-adornment-password"
+                  >
+                    Grupos
+                  </InputLabel> */}
+                  <Input
+                    disableUnderline
+                    inputRef={searchFocus}
+                    style={inputSearchStyle}
+                    id="standard-adornment-password"
+                    type="search"
+                    placeholder="Grupos"
+                    color="secondary"
+                    // className={classes.test}
+                    autoFocus
+                    inputProps={{
+                      autoFocus: true,
+                      style: { fontFamily: 'Roboto', color: 'black' },
+                    }}
+                    classes={{
+                      colorPrimary: {
+                        color: '#000',
+                      },
+                    }}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <SearchIcon />
+                      </InputAdornment>
+                    }
+                    value={values}
+                    onChange={handleChangeSearch}
+                    // endAdornment={
+                    //   <InputAdornment position="end">
+                    //     <IconButton
+                    //       aria-label="toggle password visibility"
+                    //       onClick={handleClickShowPassword}
+                    //       onMouseDown={handleMouseDownPassword}
+                    //     />
+                    //   </InputAdornment>
+                    // }
+                  />
+                </ListItem>
+
                 {names.map(TopEntity => [
                   TopEntity.groups
-                    ? TopEntity.groups.map(entity => [
-                        <MenuItem key={entity.name} value={entity.name}>
-                          <Checkbox checked={group.indexOf(entity.name) > -1} />
-                          <ListItemText primary={entity.name} />
-                          <Select
-                            labelId="demo-mutiple-checkbox-label"
-                            id="demo-mutiple-checkbox2"
-                            disableUnderline
-                            // IconComponent={() => <ArrowForwardIosIcon />}
-                            multiple
-                            // onOpen={handleOpenList}
-                            value={listdealership}
-                            onChange={handleChangeList}
-                            input={
-                              <Input />
-                              // <Button size="large" onClick={handleChangeList} />
-                            }
-                            displayEmpty
-                            renderValue={selected => selected === ''}
-                            // readOnly
-                            MenuProps={MenuPropsList}
-                          >
-                            <MenuItem disabled value="">
-                              <em>Concessionárias</em>
-                            </MenuItem>
-                            {entity.dealerships.map(dealers => [
-                              <MenuItem key={dealers.name} value={dealers.name}>
-                                <Checkbox
-                                  checked={
-                                    listdealership.indexOf(dealers.name) > -1
-                                  }
-                                />
-                                <ListItemText primary={dealers.name} />
-                              </MenuItem>,
-                            ])}
-                          </Select>
-                        </MenuItem>,
-                        // <Collapse
-                        //   unmountOnExit
-                        //   in={group.indexOf(entity.name) > -1 || false}
-                        //   timeout="auto"
-                        // >
-                        // {
-                        /* <Select
+                    ? TopEntity.groups
+                        .filter(filter =>
+                          filter.name
+                            .toLowerCase()
+                            .includes(values.toLowerCase())
+                        )
+                        .map(entity => [
+                          <MenuItem key={entity.name} value={entity.name}>
+                            <Checkbox
+                              checked={group.indexOf(entity.name) > -1}
+                            />
+                            <ListItemText primary={entity.name} />
+                            <Select
+                              labelId="demo-mutiple-checkbox-label"
+                              id="demo-mutiple-checkbox2"
+                              disableUnderline
+                              // IconComponent={() => <ArrowForwardIosIcon />}
+                              multiple
+                              // onOpen={handleOpenList}
+                              value={listdealership}
+                              onChange={handleChangeList}
+                              input={
+                                <Input />
+                                // <Button size="large" onClick={handleChangeList} />
+                              }
+                              displayEmpty
+                              renderValue={selected => selected === ''}
+                              // readOnly
+                              MenuProps={MenuPropsList}
+                            >
+                              <MenuItem disabled value="">
+                                <em>Concessionárias</em>
+                              </MenuItem>
+                              {entity.dealerships.map(dealers => [
+                                <MenuItem
+                                  key={dealers.name}
+                                  value={dealers.name}
+                                >
+                                  <Checkbox
+                                    checked={
+                                      listdealership.indexOf(dealers.name) > -1
+                                    }
+                                  />
+                                  <ListItemText primary={dealers.name} />
+                                </MenuItem>,
+                              ])}
+                            </Select>
+                          </MenuItem>,
+                          // <Collapse
+                          //   unmountOnExit
+                          //   in={group.indexOf(entity.name) > -1 || false}
+                          //   timeout="auto"
+                          // >
+                          // {
+                          /* <Select
                             labelId="demo-mutiple-checkbox-label"
                             id="demo-mutiple-checkbox2"
                             multiple
@@ -687,9 +808,9 @@ function Header() {
                               </MenuItem>,
                             ])}
                           </Select> */
-                        // },
-                        // </Collapse>,
-                      ])
+                          // },
+                          // </Collapse>,
+                        ])
                     : '',
                 ])}
               </Select>
