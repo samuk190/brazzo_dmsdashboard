@@ -1,0 +1,66 @@
+.ant-select-multiple.ant-select-selector{
+  background-color: '#000 !important ';
+  color:'#000';
+}
+/* .ant-select-selector span{
+  
+  background-color: '#000';
+  color:'#000';
+} */
+
+.ant-select-selection.ant-select-selection--single {
+  border-radius: 0px 8px 8px 0px;
+  height: 53px;
+}
+
+.ant-select-selection.ant-select-selection--single
+  > div
+  > div
+  > div
+  > div
+  + div {
+  margin-top: -5px;
+  padding: 4px 5px 5px 14px !important;
+}
+
+.ant-select-selection.ant-select-selection--single > div > div > div > div {
+  margin-top: -20px;
+}
+
+.ant-select-selection.ant-select-selection--single[aria-expanded="true"]
+  > div
+  > div
+  > div
+  > div {
+  margin-top: -10px;
+}
+
+.ant-select-selection.ant-select-selection--single[aria-expanded="true"]
+  > div
+  > div
+  > div
+  > div
+  + div {
+  margin-top: -15px;
+}
+
+.ant-select-selection__rendered {
+  padding: 0px;
+  margin: 0px;
+}
+
+.ant-select-selection-selected-value {
+  height: 53px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.ant-select-dropdown-menu.ant-select-dropdown-menu-root.ant-select-dropdown-menu-vertical {
+  padding: 0px;
+  margin: 0px;
+}
+
+.ant-select-dropdown-menu-item {
+  padding: 0px;
+  margin: 0px;
+}

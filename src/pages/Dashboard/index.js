@@ -18,6 +18,7 @@ import {
   dateFinal,
   listbrands,
   asyncbrands,
+  selectedFilters,
 } from '~/atoms/state';
 import api from '~/services/api';
 
@@ -178,12 +179,14 @@ const option = {
 };
 function Dashboard() {
   const [group, setGroupName] = useRecoilState(brands);
-  const [dealership, setDealership] = useState([]);
+  // const [group, setGroupName] = useRecoilState(brands);
+  const [selectedFilter, setSelectedFilter] = useRecoilState(selectedFilters);
+  const [brandData, setBrandData] = useState([]);
 
   async function getBrandData(id) {
     await api.get(`brands`).then(response => {
       // console.log(response.data);
-      setDealership(response.data);
+      setBrandData(response.data);
     });
   }
   useEffect(() => {
@@ -196,32 +199,46 @@ function Dashboard() {
     const arrayTitle = [];
     const arrayValue = [];
     const arrayBrands = [];
-    const arrayBrandList = [];
+    const arrayGroupList = [];
+    // eslint-disable-next-line consistent-return
     function checkselectedbrands(brand) {
-      if (group.includes('Todos')) {
+      const groups = brand.groups.map(function(elemgg, index) {
+        return elemgg.name;
+      });
+      const found = groups.some(r => selectedFilter.indexOf(r) >= 0);
+      if (selectedFilter.includes(brand.name) || found) {
         return brand;
       }
-      return group.includes(brand.name);
-
-      // return brand.name ===
     }
-    console.log(group);
+
     // console.log(dealership.filter(checkselectedbrands));
     // const itemStyle = [];
-    dealership.filter(checkselectedbrands).map(function(elem, index) {
+    brandData.filter(checkselectedbrands).map(function(elem, index) {
+      // brandData.map(function(elem, index) {
       // console.log(elem.dealerships);
       // arrayTitle.push(elem.title);
       arrayBrands.push({
         name: elem.name,
         value: elem.value,
       });
-      elem.dealerships.map(function(elemr) {
-        arrayBrandList.push({
+      function checkselectedgroups(gr) {
+        if (
+          selectedFilter.includes(gr.name) ||
+          selectedFilter.includes(elem.name)
+        ) {
+          return gr;
+        }
+        return selectedFilter.includes(gr.name);
+
+        // return brand.name ===
+      }
+      elem.groups.filter(checkselectedgroups).map(function(elemr) {
+        arrayGroupList.push({
           name: elemr.name,
           value: elemr.value,
         });
       });
-
+      console.log(arrayGroupList);
       arrayValue.push({
         value: elem.value,
         // itemStyle: {
@@ -302,7 +319,7 @@ function Dashboard() {
           // ],
         },
         {
-          name: 'Concessionária',
+          name: 'Grupos',
           type: 'pie',
           radius: ['40%', '55%'],
 
@@ -357,7 +374,7 @@ function Dashboard() {
               },
             },
           },
-          data: arrayBrandList,
+          data: arrayGroupList,
           // data: [
           //   { value: 335, name: 'Bauru' },
           //   { value: 310, name: 'Piracicaba' },

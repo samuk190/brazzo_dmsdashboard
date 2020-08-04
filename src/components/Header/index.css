@@ -1,0 +1,33 @@
+.ant-select-multiple .ant-select-selector{
+  background: none !important;
+  border: none !important;
+  color:#000;
+}
+.ant-select-multiple {
+  background-color: none !important;
+}
+/* .ant-select-selector span{
+  
+  background-color: '#000';
+  color:'#000';
+} */
+.ant-select-selector {
+  /* padding-top:25px; */
+  margin-top:25px;
+  background-color: none;
+  margin-left: 10;
+  width: 200px;
+}
+.ant-select-arrow span{
+  margin-top:10px;
+  font-size:20px;
+  /* width:100px;
+  height:100px; */
+}
+.ant-select-selection-placeholder{
+  color:#fff;
+  font-size:15px;
+  /* text-decoration: underline; */
+  /* text-underline-position: under; */
+  opacity:1 !important;
+}

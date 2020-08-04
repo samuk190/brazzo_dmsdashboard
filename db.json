@@ -13,6 +13,7 @@
       "groups": [
         {
           "name": "Grupo Prime",
+          "value": 22,
           "dealerships": [
             {
               "id": 1,
@@ -40,6 +41,7 @@
         },
         {
           "name": "Grupo Sao Paulo",
+          "value": 22,
           "dealerships": [
             {
               "id": 1,
@@ -56,6 +58,7 @@
         },
         {
           "name": "Grupo Bauru",
+          "value": 22,
           "dealerships": [
             {
               "id": 1,
@@ -72,11 +75,104 @@
         },
         {
           "name": "Grupo Terra nova",
+          "value": 22,
           "dealerships": [
             {
               "id": 1,
               "brand_id": 1,
               "name": "Terra Nova",
+              "value": 11,
+              "objective": 25,
+              "targetObjective": 15,
+              "maxObjective": 25,
+              "postId": 1,
+              "urlImage": "https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "dealership": 3,
+      "name": "Renault",
+      "value": 50,
+      "objective": 50,
+      "targetObjective": 50,
+      "maxObjective": 20,
+      "urlImage": "https://logodownload.org/wp-content/uploads/2017/10/volvo-logo.png",
+      "author": "typicode",
+      "groups": [
+        {
+          "name": "Grupo Rio de Janeiro",
+          "value": 22,
+          "dealerships": [
+            {
+              "id": 1,
+              "brand_id": 1,
+              "name": "Mococa",
+              "value": 11,
+              "objective": 25,
+              "targetObjective": 15,
+              "maxObjective": 25,
+              "postId": 1,
+              "urlImage": "https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png"
+            },
+            {
+              "id": 1,
+              "brand_id": 1,
+              "name": "Teste",
+              "value": 11,
+              "objective": 25,
+              "targetObjective": 15,
+              "maxObjective": 25,
+              "postId": 1,
+              "urlImage": "https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png"
+            }
+          ]
+        },
+        {
+          "name": "Grupo Arena",
+          "value": 22,
+          "dealerships": [
+            {
+              "id": 1,
+              "brand_id": 1,
+              "name": "Corinthians",
+              "value": 11,
+              "objective": 25,
+              "targetObjective": 15,
+              "maxObjective": 25,
+              "postId": 1,
+              "urlImage": "https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png"
+            }
+          ]
+        },
+        {
+          "name": "Teste2",
+          "value": 22,
+          "dealerships": [
+            {
+              "id": 1,
+              "brand_id": 1,
+              "name": "teste3",
+              "value": 11,
+              "objective": 25,
+              "targetObjective": 15,
+              "maxObjective": 25,
+              "postId": 1,
+              "urlImage": "https://logodownload.org/wp-content/uploads/2014/05/hyundai-logo-0.png"
+            }
+          ]
+        },
+        {
+          "name": "teste4",
+          "value": 22,
+          "dealerships": [
+            {
+              "id": 1,
+              "brand_id": 1,
+              "name": "teste5",
               "value": 11,
               "objective": 25,
               "targetObjective": 15,

@@ -1,0 +1,81 @@
+[
+  {
+    "label": "VP Accounting",
+    "tagClassName": "special",
+    "children": [
+      {
+        "label": "iWay",
+        "children": [
+          {
+            "label": "Universidad de Especialidades del Espíritu Santo"
+          },
+          {
+            "label": "Marmara University"
+          },
+          {
+            "label": "Baghdad College of Pharmacy"
+          }
+        ]
+      },
+    
+  {
+    "label": "Assistant Manager",
+    "children": [
+      {
+        "label": "SQL Server Management Studio",
+        "children": [
+          {
+            "label": "University of Sudbury"
+          },
+          {
+            "label":
+              "Evangelische Fachhochschule Berlin, Fachhochschule für Sozialarbeit und Sozialpädagogik"
+          },
+          {
+            "label": "Vitebsk State University"
+          },
+          {
+            "label": "San Jose Christian College"
+          },
+          {
+            "label": "Ivanovo State University"
+          }
+        ]
+      },
+      {
+        "label": "Abstracting",
+        "children": [
+          {
+            "label": "Adeyemi College of Education"
+          },
+          {
+            "label": "Université de Sherbrooke"
+          },
+          {
+            "label": "University College of Applied Sciences"
+          },
+          {
+            "label": "Johns Hopkins University, SAIS Bologna Center"
+          }
+        ]
+      },
+      {
+        "label": "WTL",
+        "children": [
+          {
+            "label": "Universidad de Córdoba"
+          },
+          {
+            "label": "Institut National Polytechnique de Grenoble"
+          },
+          {
+            "label": "Kyonggi University"
+          }
+        ]
+      }
+    ]
+  }
+  
+    ]
+  }
+]

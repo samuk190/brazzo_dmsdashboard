@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
-
+import { TreeSelect } from 'antd';
+import './index.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
@@ -8,6 +9,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MultilevelSidebar from 'react-multilevel-sidebar';
 import Button from '@material-ui/core/Button';
 // import { IconButton } from 'rea';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
@@ -32,6 +34,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Collapse from '@material-ui/core/Collapse';
 import BuildIcon from '@material-ui/icons/Build';
+
+import DropdownTreeSelect from 'react-dropdown-tree-select';
 // import { format, parseISO } from 'date-fns';
 // import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -41,6 +45,7 @@ import {
   createMuiTheme,
   ThemeProvider,
 } from '@material-ui/core/styles';
+import 'antd/dist/antd.css';
 
 // import Chip from '@material-ui/core/Chip';
 // import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
@@ -51,6 +56,8 @@ import {
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // pick a date util library
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 // import MomentUtils from '@date-io/moment';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -61,6 +68,7 @@ import PiechartIcon from '@material-ui/icons/PieChart';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import data from './data.json';
 import {
   searchFilter,
   dealerships,
@@ -68,6 +76,7 @@ import {
   brands,
   groups,
   regions,
+  selectedFilters,
   dateInitial,
   dateFinal,
   listbrands,
@@ -85,6 +94,14 @@ const useStyles = makeStyles(theme => ({
   },
   fullList: {
     width: 'auto',
+  },
+  dropdown: {
+    marginTop: 25,
+
+    listStyle: '!important none',
+    textDecoration: 'none',
+
+    backgroundColor: 'none',
   },
   formControl: {
     margin: theme.spacing(0),
@@ -109,6 +126,8 @@ const useStyles = makeStyles(theme => ({
 
 function Header() {
   const [values, setValues] = useRecoilState(searchFilter);
+  const [selectedFilter, setSelectedFilter] = useRecoilState(selectedFilters);
+
   const handleClickShowPassword = () => {
     // setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -120,6 +139,8 @@ function Header() {
 
   const [brand, setBrand] = useRecoilState(brands);
   const [arrayVazio, setArrayVazio] = useState([]);
+  const [brandData, setBrandData] = useState([]);
+
   const [group, setGroup] = useRecoilState(groups);
   const [dealership, setDealership] = useRecoilState(dealerships);
   const [openlist, setOpenList] = useState(false);
@@ -135,6 +156,7 @@ function Header() {
     bottom: false,
     right: false,
   });
+
   function handleOpenList(grouoOpen) {
     setOpenList(!openlist);
   }
@@ -149,21 +171,38 @@ function Header() {
     // setValues({ ...values, [prop]: event.target.value });
     searchFocus.current.focus();
     setValues(event.target.value);
+
     event.preventDefault();
     searchFocus.current.focus();
   };
   const handleChangeGroup = event => {
-    if (event !== null || event !== '') {
-      setGroup(event.target.value);
+    if (
+      (event && event.target.value !== null) ||
+      event.target.value !== '' ||
+      event.target.value !== 'search'
+    ) {
+      const filtered = event.target.value.filter(function(el) {
+        return el !== '' || el !== undefined || el !== null;
+      });
+      console.log(filtered);
+      console.log(group);
+      // percorrer grupos encontrar where.
+
+      setGroup(filtered);
+      // const deals =
+      // setDealership();
     }
+
+    // mapear names where group == event.target.value e mapear para setar todos os itens adjacentes na lista
   };
   const handleChangeList = event => {
-    if (event !== null || event !== '') {
+    if (event.target.value !== null || event !== '') {
       setListDealership(event.target.value);
     }
   };
-  // let names = ['Todos'];
 
+  // let names = ['Todos'];
+  const [groupData, setGroupData] = useState([]);
   React.useEffect(() => {
     async function loadData() {
       const datab = await api.get('brands');
@@ -188,6 +227,7 @@ function Header() {
       //   console.log(dealershipb);
       //   return dealershipb;
       // });
+      setBrandData(brand);
       setDealership(dealershipx);
       // console.log(title);
       // const groups = datab.data.map(function(brand) {
@@ -200,6 +240,38 @@ function Header() {
     }
     loadData();
   }, [setNames]);
+  const { SHOW_PARENT } = TreeSelect;
+  function getTreeData() {
+    const treeData = [];
+    brandData.map(function(task, index, array) {
+      // console.log(task);
+      // const children = task.groups.map(function(group) {
+      //   return group.name;
+      // });
+
+      treeData.push({
+        title: task.name,
+        key: task.name,
+        value: task.name,
+        children: task.groups.map(function(groupk) {
+          return {
+            title: groupk.name,
+            key: groupk.name,
+            value: groupk.name,
+            children: groupk.dealerships.map(function(dealer) {
+              return {
+                title: dealer.name,
+                key: dealer.name,
+                value: dealer.name,
+              };
+            }),
+          };
+        }),
+      });
+    });
+    // console.log(treeData);
+    return treeData;
+  }
 
   // const names = brand.title;
 
@@ -227,7 +299,11 @@ function Header() {
   //   setPersonName(value);
   // };
   // Temas
-
+  function onTreeSelect(value, node, extra) {
+    // console.log(value);
+    // console.log(node);
+    // console.log(extra);
+  }
   const ITEM_HEIGHT = 200;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -267,26 +343,16 @@ function Header() {
   const handleDateChangeFinal = date => {
     setFinalDate(date);
   };
-  const styleSearch = {
-    color: '#909090',
-    marginTop: 5,
-    marginRight: 10,
-  };
+  // const styleSearch = {
+  //   color: '#909090',
+  //   marginTop: 5,
+  //   marginRight: 10,
+  // };
   const inputSearchStyle = {
     primary: {
       color: '#000',
       textColor: '#000',
     },
-    secondary: {
-      color: '#000',
-      textColor: '#000',
-    },
-    colorPrimary: {
-      textColor: '#000',
-      color: '#000',
-    },
-    color: 'black',
-    textColor: 'black',
   };
   const [darkState, setDarkState] = useState(false);
   const palletType = darkState ? 'light' : 'dark';
@@ -508,6 +574,27 @@ function Header() {
   ];
   const profile = useSelector(state => state.user.profile);
 
+  function verifyAll(entity) {
+    const all = entity.dealerships.every(({ name }) =>
+      listdealership.includes(name)
+    );
+    // const allIsTruthy = entity.dealerships.filter(({ name }) =>
+    //   listdealership.includes(name)
+    // );
+    return !all;
+  }
+
+  function verifyCheck(entity) {
+    if (entity.dealerships.some(({ name }) => listdealership.includes(name))) {
+      return true;
+    }
+    return false;
+    // entity.dealerships.map(dealers => {
+    //   if (listdealership.indexOf(dealers.name) > 1) {
+    //     return true;
+    //   }
+    // });
+  }
   const toggleDrawer = open => event => {
     if (
       event.type === 'keydown' &&
@@ -561,6 +648,29 @@ function Header() {
       </List>
     </div>
   );
+  // const tProps = {
+  //   treeData,
+  //   value: valuet,
+
+  //   treeCheckable: true,
+  //   showCheckedStrategy: SHOW_PARENT,
+  //   placeholder: 'Please select',
+  //   style: {
+  //     width: '100%',
+  //   },
+  // };
+  function handletreechange(value, label, extra) {
+    // console.log(label);
+    // Faz algo se o elemento está checkado
+    setSelectedFilter(value);
+    // if (extra.checked) {
+    //   // setGroup(label);
+    // } else {
+    // }
+
+    // console.log(extra);
+    // console.log(value);
+  }
   return (
     <ThemeProvider theme={darkTheme}>
       <Container>
@@ -631,6 +741,7 @@ function Header() {
                 </Grid>
               </MuiPickersUtilsProvider>
             </Calendar>
+
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-mutiple-che3ckbox-label">Marcas</InputLabel>
               <Select
@@ -651,6 +762,37 @@ function Header() {
                 ))}
               </Select>
             </FormControl>
+            {/* <div>
+              <DropdownTreeSelect
+                data={data}
+                onChange={onChange}
+                className="mdl-demo"
+              />
+            </div> */}
+            <FormControl>
+              <TreeSelect
+                onSelect={(value, node, extra) =>
+                  onTreeSelect(value, node, extra)
+                }
+                showSearch
+                maxTagCount={2}
+                showArrow
+                treeCheckable
+                showCheckedStrategy={SHOW_PARENT}
+                // style={{
+                //   width: '250px',
+                //   color: 'none',
+                //   marginTop: 25,
+                //   marginLeft: 10,
+                // }}
+                treeData={getTreeData()}
+                onChange={(value, label, extra) =>
+                  handletreechange(value, label, extra)
+                }
+                placeholder="Marcas"
+                value={selectedFilter}
+              />
+            </FormControl>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-mutiple-checkbox-label">Grupos</InputLabel>
 
@@ -668,7 +810,7 @@ function Header() {
               <em>Grupos</em>
             </MenuItem> */}
 
-                <ListItem value="">
+                <ListItem disabled value="">
                   {/* <InputLabel
                     style={styleSearch}
                     // FormLabelClasses={{
@@ -692,11 +834,6 @@ function Header() {
                     inputProps={{
                       autoFocus: true,
                       style: { fontFamily: 'Roboto', color: 'black' },
-                    }}
-                    classes={{
-                      colorPrimary: {
-                        color: '#000',
-                      },
                     }}
                     endAdornment={
                       <InputAdornment position="end">
@@ -728,9 +865,27 @@ function Header() {
                         .map(entity => [
                           <MenuItem key={entity.name} value={entity.name}>
                             <Checkbox
-                              checked={group.indexOf(entity.name) > -1}
+                              checkedIcon={
+                                verifyAll(entity) ? (
+                                  <IndeterminateCheckBoxIcon />
+                                ) : (
+                                  <CheckBoxIcon />
+                                )
+                              }
+                              checked={
+                                verifyCheck(entity)
+                                // group.indexOf(entity.name) > -1 &&
+                              }
                             />
                             <ListItemText primary={entity.name} />
+                          </MenuItem>,
+                          <div
+                            style={{
+                              // position: 'absolute',
+                              marginTop: 0,
+                              marginLeft: 200,
+                            }}
+                          >
                             <Select
                               labelId="demo-mutiple-checkbox-label"
                               id="demo-mutiple-checkbox2"
@@ -740,12 +895,13 @@ function Header() {
                               // onOpen={handleOpenList}
                               value={listdealership}
                               onChange={handleChangeList}
+                              margin="dense"
                               input={
                                 <Input />
                                 // <Button size="large" onClick={handleChangeList} />
                               }
                               displayEmpty
-                              renderValue={selected => selected === ''}
+                              renderValue={selectedlist => selectedlist === ''}
                               // readOnly
                               MenuProps={MenuPropsList}
                             >
@@ -766,7 +922,7 @@ function Header() {
                                 </MenuItem>,
                               ])}
                             </Select>
-                          </MenuItem>,
+                          </div>,
                           // <Collapse
                           //   unmountOnExit
                           //   in={group.indexOf(entity.name) > -1 || false}
