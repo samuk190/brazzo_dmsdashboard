@@ -1,8 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useMemo, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import ReactEcharts from 'echarts-for-react';
-import { SideNav, Item, Nav } from 'react-sidenav';
 import 'react-multilevel-sidebar/src/Sidebar.css';
 import Typography from '@material-ui/core/Typography';
 import { Container } from './styles';

@@ -18,6 +18,9 @@ export default function Routes() {
       <Route path="/" exact component={Main} />
       <Route path="/register" component={SignUp} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/dashboard/manager" component={Dashboard} isPrivate />
+      <Route path="/dashboard/consultant" component={Dashboard} isPrivate />
+
       <Route path="/test" component={Test} isPrivate />
       <Route path="/ranking" component={Ranking} isPrivate />
       <Route path="/utilization" component={Utilization} isPrivate />

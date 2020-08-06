@@ -1,10 +1,12 @@
 .ant-select-multiple .ant-select-selector{
   background: none !important;
   border: none !important;
+  white-space: nowrap;
   color:#000;
 }
 .ant-select-multiple {
   background-color: none !important;
+  white-space: nowrap;
 }
 /* .ant-select-selector span{
   
@@ -14,9 +16,14 @@
 .ant-select-selector {
   /* padding-top:25px; */
   margin-top:25px;
+  white-space: nowrap;
   background-color: none;
   margin-left: 10;
-  width: 200px;
+  min-width: 170px;
+  text-overflow: ellipsis;
+
+  max-width: 800px;
+  /* width: 200px; */
 }
 .ant-select-arrow span{
   margin-top:10px;

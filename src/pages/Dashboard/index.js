@@ -1,25 +1,13 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useMemo, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import ReactEcharts from 'echarts-for-react';
-import { SideNav, Item, Nav } from 'react-sidenav';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 // import '~/pages/Ticket/node_modules/react-multilevel-sidebar/src/Sidebar.css';
 import { makeStyles } from '@material-ui/core/styles';
-import CardHeader from '@material-ui/core/CardHeader';
-import {
-  brands,
-  dateInitial,
-  dateFinal,
-  listbrands,
-  asyncbrands,
-  selectedFilters,
-} from '~/atoms/state';
+import { selectedFilters } from '~/atoms/state';
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -30,9 +18,13 @@ const useStyles = makeStyles({
     padding: 0,
     margin: 0,
     backgroundColor: '#ccc',
-    minWidth: 275,
-    maxWidth: 900,
-    maxHeight: 900,
+    '@media (max-width:500px)': { width: 800, height: 350 },
+    '@media (min-width:1000px)': { width: 1000, height: 500 },
+    // width: 1000,
+    // height: 500,
+    // minWidth: 275,
+    // maxWidth: 900,
+    // maxHeight: 900,
   },
   header: {
     textAlign: 'center',
@@ -57,133 +49,133 @@ const useStyles = makeStyles({
 const arrayValue = [];
 
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-const option = {
-  grid: {
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-  },
-  tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b}: {c} ({d}%)',
-  },
-  legend: {
-    padding: 0,
-    itemGap: 0,
-    orient: 'vertical',
-    left: 0,
+// const option = {
+//   grid: {
+//     left: 0,
+//     top: 0,
+//     right: 0,
+//     bottom: 0,
+//   },
+//   tooltip: {
+//     trigger: 'item',
+//     formatter: '{a} <br/>{b}: {c} ({d}%)',
+//   },
+//   legend: {
+//     padding: 0,
+//     itemGap: 0,
+//     orient: 'vertical',
+//     left: 0,
 
-    data: [
-      '直达',
-      '营销广告',
-      '搜索引擎',
-      '邮件营销',
-      '联盟广告',
-      '视频广告',
-      '百度',
-      '谷歌',
-      '必应',
-      '其他',
-    ],
-  },
-  series: [
-    {
-      name: 'Grupos',
-      type: 'pie',
-      selectedMode: 'single',
-      radius: [0, '40%'],
+//     data: [
+//       '直达',
+//       '营销广告',
+//       '搜索引擎',
+//       '邮件营销',
+//       '联盟广告',
+//       '视频广告',
+//       '百度',
+//       '谷歌',
+//       '必应',
+//       '其他',
+//     ],
+//   },
+//   series: [
+//     {
+//       name: 'Grupos',
+//       type: 'pie',
+//       selectedMode: 'single',
+//       radius: [0, '40%'],
 
-      label: {
-        position: 'inner',
-      },
-      labelLine: {
-        show: false,
-      },
+//       label: {
+//         position: 'inner',
+//       },
+//       labelLine: {
+//         show: false,
+//       },
 
-      data: [
-        //  selected: true
-        { value: 335, name: 'Hyundai' },
-        { value: 679, name: 'Renault' },
-        { value: 1548, name: 'Peugeot' },
-      ],
-    },
-    {
-      name: 'Concessionária',
-      type: 'pie',
-      radius: ['40%', '55%'],
+//       data: [
+//         //  selected: true
+//         { value: 335, name: 'Hyundai' },
+//         { value: 679, name: 'Renault' },
+//         { value: 1548, name: 'Peugeot' },
+//       ],
+//     },
+//     {
+//       name: 'Concessionária',
+//       type: 'pie',
+//       radius: ['40%', '55%'],
 
-      label: {
-        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-        backgroundColor: '#eee',
-        borderColor: '#aaa',
-        borderWidth: 1,
-        //   radius: ['70%', '70%'],
-        // position: 'inner',
+//       label: {
+//         formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+//         backgroundColor: '#eee',
+//         borderColor: '#aaa',
+//         borderWidth: 1,
+//         //   radius: ['70%', '70%'],
+//         // position: 'inner',
 
-        // position:'static',
+//         // position:'static',
 
-        // margin:250,
-        // padding:cpy1,
-        borderRadius: 4,
-        axisExpandWidth: 100,
-        // shadowBlur:3,
-        // shadowOffsetX: 2,
-        // shadowOffsetY: 2,
-        // shadowColor: '#999',
-        // padding: [50, 50]
-        //  top:1500,
-        rich: {
-          a: {
-            color: '#999',
-            lineHeight: 22,
-            align: 'center',
-          },
-          // abg: {
-          //     backgroundColor: '#333',
-          //     width: '100%',
-          //     align: 'right',
-          //     height: 22,
-          //     borderRadius: [4, 4, 0, 0]
-          // },
-          hr: {
-            borderColor: '#aaa',
-            width: '100%',
-            borderWidth: 0.5,
-            height: 0,
-          },
-          b: {
-            fontSize: 16,
-            lineHeight: 33,
-          },
-          per: {
-            color: '#eee',
-            backgroundColor: '#334455',
-            // padding: [2, 4],
-            // borderRadius: 2
-          },
-        },
-      },
-      data: [
-        { value: 335, name: 'Bauru' },
-        { value: 310, name: 'Piracicaba' },
-        { value: 234, name: 'Avaré' },
-        { value: 135, name: 'Itapetininga' },
-        { value: 1048, name: 'Itapercerica' },
-        { value: 251, name: 'Bragança Paulista' },
-        { value: 147, name: 'Santo André' },
-        { value: 102, name: 'São Caetano do Sul' },
-      ],
-    },
-  ],
-};
+//         // margin:250,
+//         // padding:cpy1,
+//         borderRadius: 4,
+//         axisExpandWidth: 100,
+//         // shadowBlur:3,
+//         // shadowOffsetX: 2,
+//         // shadowOffsetY: 2,
+//         // shadowColor: '#999',
+//         // padding: [50, 50]
+//         //  top:1500,
+//         rich: {
+//           a: {
+//             color: '#999',
+//             lineHeight: 22,
+//             align: 'center',
+//           },
+//           // abg: {
+//           //     backgroundColor: '#333',
+//           //     width: '100%',
+//           //     align: 'right',
+//           //     height: 22,
+//           //     borderRadius: [4, 4, 0, 0]
+//           // },
+//           hr: {
+//             borderColor: '#aaa',
+//             width: '100%',
+//             borderWidth: 0.5,
+//             height: 0,
+//           },
+//           b: {
+//             fontSize: 16,
+//             lineHeight: 33,
+//           },
+//           per: {
+//             color: '#eee',
+//             backgroundColor: '#334455',
+//             // padding: [2, 4],
+//             // borderRadius: 2
+//           },
+//         },
+//       },
+//       data: [
+//         { value: 335, name: 'Bauru' },
+//         { value: 310, name: 'Piracicaba' },
+//         { value: 234, name: 'Avaré' },
+//         { value: 135, name: 'Itapetininga' },
+//         { value: 1048, name: 'Itapercerica' },
+//         { value: 251, name: 'Bragança Paulista' },
+//         { value: 147, name: 'Santo André' },
+//         { value: 102, name: 'São Caetano do Sul' },
+//       ],
+//     },
+//   ],
+// };
 function Dashboard() {
-  const [group, setGroupName] = useRecoilState(brands);
   // const [group, setGroupName] = useRecoilState(brands);
-  const [selectedFilter, setSelectedFilter] = useRecoilState(selectedFilters);
+  // const [group, setGroupName] = useRecoilState(brands);
+  const [selectedFilter] = useRecoilState(selectedFilters);
   const [brandData, setBrandData] = useState([]);
 
-  async function getBrandData(id) {
+  async function getBrandData() {
     await api.get(`brands`).then(response => {
       // console.log(response.data);
       setBrandData(response.data);
@@ -196,8 +188,8 @@ function Dashboard() {
   function getOption() {
     // await ;
     // const datatobe = await api.get(`dealerships?brand_id=1`);
-    const arrayTitle = [];
-    const arrayValue = [];
+    // const arrayTitle = [];
+    // const arrayValue = [];
     const arrayBrands = [];
     const arrayGroupList = [];
     // eslint-disable-next-line consistent-return
@@ -213,7 +205,7 @@ function Dashboard() {
 
     // console.log(dealership.filter(checkselectedbrands));
     // const itemStyle = [];
-    brandData.filter(checkselectedbrands).map(function(elem, index) {
+    brandData.filter(checkselectedbrands).map(function (elem, index) {
       // brandData.map(function(elem, index) {
       // console.log(elem.dealerships);
       // arrayTitle.push(elem.title);
@@ -266,6 +258,18 @@ function Dashboard() {
     console.log(arrayBrands);
 
     return {
+      title: {
+        text: 'Objetivo Faturamento Periodo x até y',
+        textStyle: {
+          color: '#000',
+          width: '100%',
+          align: 'center',
+        },
+
+        padding: [0, 0, 0, 300],
+        // textAlign: 'left',
+      },
+
       grid: {
         left: 0,
         top: 0,
@@ -276,14 +280,34 @@ function Dashboard() {
         trigger: 'item',
         formatter: '{a} <br/>{b}: {c} ({d}%)',
       },
+      toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'left',
+        top: 'center',
+        feature: {
+          mark: { show: true },
+          dataView: {
+            show: true,
+            readOnly: false,
+            title: 'Ver dados',
+
+            lang: ['DataView', 'Fechar', 'Atualizar'],
+          },
+
+          restore: { show: true, title: 'Restaurar' },
+          saveAsImage: { show: true, title: 'Salvar Imagem' },
+        },
+      },
+
       legend: {
         padding: 0,
         itemGap: 0,
-        orient: 'vertical',
+        // orient: 'vertical',
         left: 0,
 
         data: [
-          '直达',
+          'Teste',
           '营销广告',
           '搜索引擎',
           '邮件营销',
@@ -419,10 +443,10 @@ function Dashboard() {
           Gráfico Fatia
         </Typography> */}
         {/* <Paper elevation={3} /> */}
-        <CardContent>
+        <CardContent style={{ width: '100%', height: '100%' }}>
           <ReactEcharts
             option={getOption()}
-            style={{ height: '700px', width: '100%', alignSelf: 'center' }}
+            style={{ height: '100%', width: '100%', alignSelf: 'center' }}
             className="react_for_echarts"
           />
           {/* <Paper /> */}

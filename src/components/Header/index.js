@@ -742,7 +742,7 @@ function Header() {
               </MuiPickersUtilsProvider>
             </Calendar>
 
-            <FormControl className={classes.formControl}>
+            {/* <FormControl className={classes.formControl}>
               <InputLabel id="demo-mutiple-che3ckbox-label">Marcas</InputLabel>
               <Select
                 labelId="demo-mutiple-checkbox-label"
@@ -761,7 +761,7 @@ function Header() {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
             {/* <div>
               <DropdownTreeSelect
                 data={data}
@@ -769,208 +769,6 @@ function Header() {
                 className="mdl-demo"
               />
             </div> */}
-            <FormControl>
-              <TreeSelect
-                onSelect={(value, node, extra) =>
-                  onTreeSelect(value, node, extra)
-                }
-                showSearch
-                maxTagCount={2}
-                showArrow
-                treeCheckable
-                showCheckedStrategy={SHOW_PARENT}
-                // style={{
-                //   width: '250px',
-                //   color: 'none',
-                //   marginTop: 25,
-                //   marginLeft: 10,
-                // }}
-                treeData={getTreeData()}
-                onChange={(value, label, extra) =>
-                  handletreechange(value, label, extra)
-                }
-                placeholder="Marcas"
-                value={selectedFilter}
-              />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-mutiple-checkbox-label">Grupos</InputLabel>
-
-              <Select
-                labelId="demo-mutiple-checkbox-label"
-                id="demo-mutiple-checkbox"
-                multiple
-                value={group}
-                onChange={handleChangeGroup}
-                input={<Input />}
-                renderValue={selected => selected.join(', ')}
-                MenuProps={MenuProps}
-              >
-                {/* <MenuItem disabled value="">
-              <em>Grupos</em>
-            </MenuItem> */}
-
-                <ListItem disabled value="">
-                  {/* <InputLabel
-                    style={styleSearch}
-                    // FormLabelClasses={{
-                    //   root: classes.formText,
-                    //   focused: classes.formLabelFocused,
-                    // }}
-                    htmlFor="standard-adornment-password"
-                  >
-                    Grupos
-                  </InputLabel> */}
-                  <Input
-                    disableUnderline
-                    inputRef={searchFocus}
-                    style={inputSearchStyle}
-                    id="standard-adornment-password"
-                    type="search"
-                    placeholder="Grupos"
-                    color="secondary"
-                    // className={classes.test}
-                    autoFocus
-                    inputProps={{
-                      autoFocus: true,
-                      style: { fontFamily: 'Roboto', color: 'black' },
-                    }}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <SearchIcon />
-                      </InputAdornment>
-                    }
-                    value={values}
-                    onChange={handleChangeSearch}
-                    // endAdornment={
-                    //   <InputAdornment position="end">
-                    //     <IconButton
-                    //       aria-label="toggle password visibility"
-                    //       onClick={handleClickShowPassword}
-                    //       onMouseDown={handleMouseDownPassword}
-                    //     />
-                    //   </InputAdornment>
-                    // }
-                  />
-                </ListItem>
-
-                {names.map(TopEntity => [
-                  TopEntity.groups
-                    ? TopEntity.groups
-                        .filter(filter =>
-                          filter.name
-                            .toLowerCase()
-                            .includes(values.toLowerCase())
-                        )
-                        .map(entity => [
-                          <MenuItem key={entity.name} value={entity.name}>
-                            <Checkbox
-                              checkedIcon={
-                                verifyAll(entity) ? (
-                                  <IndeterminateCheckBoxIcon />
-                                ) : (
-                                  <CheckBoxIcon />
-                                )
-                              }
-                              checked={
-                                verifyCheck(entity)
-                                // group.indexOf(entity.name) > -1 &&
-                              }
-                            />
-                            <ListItemText primary={entity.name} />
-                          </MenuItem>,
-                          <div
-                            style={{
-                              // position: 'absolute',
-                              marginTop: 0,
-                              marginLeft: 200,
-                            }}
-                          >
-                            <Select
-                              labelId="demo-mutiple-checkbox-label"
-                              id="demo-mutiple-checkbox2"
-                              disableUnderline
-                              // IconComponent={() => <ArrowForwardIosIcon />}
-                              multiple
-                              // onOpen={handleOpenList}
-                              value={listdealership}
-                              onChange={handleChangeList}
-                              margin="dense"
-                              input={
-                                <Input />
-                                // <Button size="large" onClick={handleChangeList} />
-                              }
-                              displayEmpty
-                              renderValue={selectedlist => selectedlist === ''}
-                              // readOnly
-                              MenuProps={MenuPropsList}
-                            >
-                              <MenuItem disabled value="">
-                                <em>Concessionárias</em>
-                              </MenuItem>
-                              {entity.dealerships.map(dealers => [
-                                <MenuItem
-                                  key={dealers.name}
-                                  value={dealers.name}
-                                >
-                                  <Checkbox
-                                    checked={
-                                      listdealership.indexOf(dealers.name) > -1
-                                    }
-                                  />
-                                  <ListItemText primary={dealers.name} />
-                                </MenuItem>,
-                              ])}
-                            </Select>
-                          </div>,
-                          // <Collapse
-                          //   unmountOnExit
-                          //   in={group.indexOf(entity.name) > -1 || false}
-                          //   timeout="auto"
-                          // >
-                          // {
-                          /* <Select
-                            labelId="demo-mutiple-checkbox-label"
-                            id="demo-mutiple-checkbox2"
-                            multiple
-                            displayEmpty
-                            // onOpen={handleOpenList}
-                            value={listdealership}
-                            onChange={handleChangeList}
-                            input={<Input />}
-                            renderValue={selected => selected.join(', ')}
-                            MenuProps={MenuPropsList}
-                          >
-                            <MenuItem disabled value="">
-                              <em>Concessionárias</em>
-                            </MenuItem>
-                            {entity.dealerships.map(dealers => [
-                              <MenuItem
-                                // open={false}
-                                // onOpen={() =>
-                                //   handleOpenList(
-                                //     listdealership.indexOf(dealers.name) > -1
-                                //   )
-                                // }
-                                key={dealers.name}
-                                value={dealers.name}
-                              >
-                                <Checkbox
-                                  checked={
-                                    listdealership.indexOf(dealers.name) > -1
-                                  }
-                                />
-                                <ListItemText primary={dealers.name} />
-                              </MenuItem>,
-                            ])}
-                          </Select> */
-                          // },
-                          // </Collapse>,
-                        ])
-                    : '',
-                ])}
-              </Select>
-            </FormControl>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-mutiple-che3ckbox-label">Regiões</InputLabel>
               <Select
@@ -991,6 +789,32 @@ function Header() {
                 ))}
               </Select>
             </FormControl>
+            <FormControl>
+              <TreeSelect
+                onSelect={(value, node, extra) =>
+                  onTreeSelect(value, node, extra)
+                }
+                showSearch
+                maxTagCount={1}
+                maxTagTextLength={5}
+                showArrow
+                treeCheckable
+                showCheckedStrategy={SHOW_PARENT}
+                // style={{
+                //   width: '250px',
+                //   color: 'none',
+                //   marginTop: 25,
+                //   marginLeft: 10,
+                // }}
+                treeData={getTreeData()}
+                onChange={(value, label, extra) =>
+                  handletreechange(value, label, extra)
+                }
+                placeholder="Marcas"
+                value={selectedFilter}
+              />
+            </FormControl>
+
             <Link style={{ paddingRight: 10 }} to="/dashboard" />
             <Link style={{ paddingRight: 10 }} to="/dashboard" />
             <Link style={{ paddingRight: 10 }} to="/dashboard" />

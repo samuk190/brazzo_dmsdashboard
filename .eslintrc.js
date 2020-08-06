@@ -27,6 +27,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 'off',
+    "generators": "never",
     "no-underscore-dangle": "off",
     "no-param-reassign": 'off',
     'prettier/prettier': 'error',
