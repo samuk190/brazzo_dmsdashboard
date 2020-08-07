@@ -4,6 +4,9 @@ import Route from './Route';
 // import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
+import DashboardConsultant from '../pages/DashboardConsultant';
+import DashboardManager from '../pages/DashboardManager';
+
 import Main from '../pages/Main';
 import Utilization from '../pages/Utilization';
 import Sugestion from '../pages/Sugestion';
@@ -18,8 +21,8 @@ export default function Routes() {
       <Route path="/" exact component={Main} />
       <Route path="/register" component={SignUp} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path="/dashboard/manager" component={Dashboard} isPrivate />
-      <Route path="/dashboard/consultant" component={Dashboard} isPrivate />
+      <Route path="/mdashboard" component={DashboardManager} isPrivate />
+      <Route path="/cdashboard"  component={DashboardConsultant} isPrivate />
 
       <Route path="/test" component={Test} isPrivate />
       <Route path="/ranking" component={Ranking} isPrivate />

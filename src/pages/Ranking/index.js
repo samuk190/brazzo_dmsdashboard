@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 
-import 'react-multilevel-sidebar/src/Sidebar.css';
+// import 'react-multilevel-sidebar/src/Sidebar.css';
 import 'echarts-gl';
 import Typography from '@material-ui/core/Typography';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
