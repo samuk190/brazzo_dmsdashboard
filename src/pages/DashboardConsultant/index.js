@@ -3,6 +3,9 @@ import React from 'react';
 import 'fontsource-red-hat-display';
 import { Container } from './styles';
 import 'echarts-gl';
+
+import ReactEcharts from 'echarts-for-react';
+import { Collapse } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import { Grid } from '@material-ui/core/';
@@ -13,7 +16,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Typography from '@material-ui/core/Typography';
+import { findAllByDisplayValue } from '@testing-library/react';
 const useStyles = makeStyles({
   divGrid: {
     alignSelf:'center',
@@ -37,7 +43,7 @@ const useStyles = makeStyles({
     // marginRight: 90,
     color:'#06A489',
     margin: 0,
-    fontSize:'48px',
+    fontSize:'35px',
     fontFamily: 'Red Hat Display',
   },
   headerfaturamento: {
@@ -74,6 +80,7 @@ const useStyles = makeStyles({
 
 function DashboardConsultant() {
 //Dados dos cards
+const [arrayCollapse,setArrayCollapse] = React.useState([]);
 const classes = useStyles();
 const data = [
   {
@@ -82,7 +89,7 @@ const data = [
     header: classes.headerfaturamento,
     mid: classes.midfaturamento,
     linearbarclass: classes.faturamentobar,
-    valor: '10000',
+    valor: '121',
     icon: true,
     stepper: true,
   },
@@ -95,7 +102,7 @@ const data = [
     mid: classes.midrevisoes,
     linearclass: classes.revisoes,
     linearbarclass: classes.revisoesbar,
-    valor: '7600',
+    valor: '12%',
   },
   {
     title: 'Conversão de Pacotes',
@@ -123,11 +130,44 @@ const data = [
 ];
 
 //Fim dos dados
+const option = {
+  // color: '#FFF',
+    grid: {
+    left: 50,
+    top: 50,
+    right: 10,
+    bottom: 20,
+  },
 
+  color: '#24AE96',
+  xAxis: {
+    // backgroundColor: '#24AE96',
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+      type: 'value'
+  },
+  series: [{
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      type: 'line'
+  }]
+};
 
 
   // const profile = useSelector(state => state.user.profile);
-
+function changeArrayColapse(index) {
+ 
+  if (!arrayCollapse[index]){
+    arrayCollapse.push({active: false})
+  }
+   
+    const newArr = arrayCollapse.map((el, i) => i === index ? ({ ...el, active: !el.active }) : el )
+    setArrayCollapse(newArr);
+  
+  // console.log('aqui');
+  // console.log(arrayCollapse[index].active);
+}
   return (
     <Container>
      <Typography
@@ -136,7 +176,7 @@ const data = [
           align="left"
           component="h4"
         >
-        <ArrowForwardIosIcon style={{marginBottom:10}}></ArrowForwardIosIcon>  PAINEL CONSULTOR
+        <ArrowForwardIosIcon ></ArrowForwardIosIcon>  PAINEL CONSULTOR
         </Typography>  
 
         <div className={classes.divGrid}>
@@ -148,7 +188,7 @@ const data = [
           alignItems="flex-start"
           className={classes.grid}
         >
-          {data.map(elem => (
+          {data.map(function(elem,index,arrayobject) {  return (
             <Grid
               item
               spacing={3}
@@ -184,16 +224,30 @@ const data = [
                   >
                     {elem.valor}
                   
-             
+            
                    
                   </Typography>
-                  <BarChartIcon style={{border:'2px solid #24AE96',backgroundColor:'#24AE96', borderRadius:30, position:'absolute', marginLeft:50, marginTop:0, color:'#FFF', width:50,height:50}}></BarChartIcon>
-             
+                  {arrayCollapse[index] && arrayCollapse[index].active ? '' :  (    <IconButton onClick={() => changeArrayColapse(index)} size="medium" style={{border:'2px solid #24AE96',backgroundColor:'#24AE96',justifyContent:'center',alignItems:'center', borderRadius:30, position:'absolute', marginLeft:50, marginTop:0, color:'#FFF', width:50,height:50}}>
+                  <BarChartIcon style={{ marginTop:-10,width:'40px',height: '100%'}}></BarChartIcon>
+                  </IconButton>)} 
+               
+                  
+                  <Collapse in={arrayCollapse[index] && arrayCollapse[index].active} timeout="auto" unmountOnExit> 
+                  <ReactEcharts
+                      // theme="dark"
+                      option={option}
+                      style={{ padding:0,margin:0,height: '200px', width: '100%' }}
+                      className="react_for_echarts"
+        />
+                  <IconButton onClick={() => changeArrayColapse(index)} align="center">
+                  <KeyboardArrowUpIcon></KeyboardArrowUpIcon>
+                  </IconButton>
+                  </Collapse>
             
                 </CardContent>
               </Card>
             </Grid>
-          ))}
+          )})}
         </Grid>
       </div>
     </Container>

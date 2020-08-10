@@ -11,6 +11,7 @@ import Main from '../pages/Main';
 import Utilization from '../pages/Utilization';
 import Sugestion from '../pages/Sugestion';
 import Profile from '../pages/Profile';
+import RankingConsultant from '../pages/RankingConsultant';
 import Test from '../pages/Test';
 import Ranking from '../pages/Ranking';
 import Ticket from '../pages/Ticket';
@@ -23,9 +24,11 @@ export default function Routes() {
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/mdashboard" component={DashboardManager} isPrivate />
       <Route path="/cdashboard"  component={DashboardConsultant} isPrivate />
-
+      <Route path="/cranking" component={RankingConsultant} isPrivate />
       <Route path="/test" component={Test} isPrivate />
       <Route path="/ranking" component={Ranking} isPrivate />
+   
+
       <Route path="/utilization" component={Utilization} isPrivate />
       <Route path="/sugestion" component={Sugestion} isPrivate />
       <Route path="/ticket" component={Ticket} isPrivate />

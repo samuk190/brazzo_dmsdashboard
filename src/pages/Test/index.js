@@ -7,6 +7,8 @@ import Card from '@material-ui/core/Card';
 import { Grid } from '@material-ui/core/';
 import clsx from 'clsx';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import StepConnector from '@material-ui/core/StepConnector';
+
 import CardContent from '@material-ui/core/CardContent';
 // import '~/pages/Ticket/node_modules/react-multilevel-sidebar/src/Sidebar.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -38,10 +40,11 @@ const useColorlibStepIconStyles = makeStyles({
     // borderColor: '#ccc',
     zIndex: 1,
     color: '#fff',
-    width: 30,
-    height: 30,
+    width: 50,
+    height: 50,
     display: 'flex',
-    borderRadius: '50%',
+
+    borderRadius: '10%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -77,6 +80,13 @@ function ColorlibStepIcon(props) {
     4: getIcon(3),
     5: getIcon(4),
     6: getIcon(5),
+    7: getIcon(6),
+    8: getIcon(7),
+    9: getIcon(8),
+    10: getIcon(9),
+    11: getIcon(10),
+    12: getIcon(11),
+   
   };
   return (
     <div
@@ -224,6 +234,7 @@ const useStyles = makeStyles({
   },
   divGrid: {
     flexGrow: 1,
+
   },
   grid: {
     padding: 0,
@@ -231,9 +242,9 @@ const useStyles = makeStyles({
   stepper: {
     background: 'none',
     padding: 0,
-    paddingTop: 10,
-    width: 100,
-    height: 80,
+    marginTop: 60,
+    width: 1280,
+    height: 200,
   },
   header: {
     textAlign: 'center',
@@ -396,21 +407,21 @@ function Test() {
   function getSteps(active) {
     const number = getMonth(new Date(finalFormatted));
 
-    if (number >= 6) {
-      return ['Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-    }
-    return ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
+    // if (number >= 6) {
+    //   return ['Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    // }
+    return ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun','Jul','Ago','Set','Out','Nov','Dez'];
   }
   const [activeStep, setActiveStep] = React.useState(
     getMonth(new Date(finalFormatted) - 1)
   );
   useEffect(() => {
     const month = getMonth(new Date(finalFormatted));
-    if (month >= 6) {
-      setActiveStep(month - 6);
-    } else {
+    // if (month >= 6) {
+    //   setActiveStep(month - 6);
+    // } else {
       setActiveStep(month);
-    }
+    // }
     return () => {};
   }, [finalFormatted]);
   const steps = getSteps(activeStep);
@@ -519,22 +530,9 @@ function Test() {
                     >
                       {elem.title}
                     </Typography>
-                    {elem.stepper ? (
-                      <Stepper
-                        classes={{ root: classes.stepper }}
-                        alternativeLabel
-                        activeStep={activeStep}
-                        // connector={<ColorlibConnector />}
-                      >
-                        {steps.map(label => (
-                          <Step>
-                            <StepLabel StepIconComponent={ColorlibStepIcon}>
-                              {label}
-                            </StepLabel>
-                          </Step>
-                        ))}
-                      </Stepper>
-                    ) : null}
+                    {/* {elem.stepper ? (
+                     
+                    ) : null} */}
                   </Typography>
                   <LinearProgress
                     variant="determinate"
@@ -548,8 +546,29 @@ function Test() {
                 </CardContent>
               </Card>
             </Grid>
+            
           ))}
         </Grid>
+        
+        <Stepper
+                        classes={{ root: classes.stepper }}
+                        alternativeLabel
+                        activeStep={activeStep}
+                        connector={<StepConnector style={{marginTop:13}}/>}
+                        // orientation="vertical"
+                      >
+                        {steps.map(label => (
+                         
+                          <Step>
+                            <StepLabel StepIconComponent={ColorlibStepIcon}>
+                              {label}
+                            </StepLabel>
+                          </Step>
+                       
+                          
+                        ))}
+                    
+                      </Stepper>
       </div>
     </Container>
   );
