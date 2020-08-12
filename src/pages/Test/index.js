@@ -6,11 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import { Grid } from '@material-ui/core/';
 import clsx from 'clsx';
+import Divider from '@material-ui/core/Divider';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import StepConnector from '@material-ui/core/StepConnector';
-
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import CardContent from '@material-ui/core/CardContent';
 // import '~/pages/Ticket/node_modules/react-multilevel-sidebar/src/Sidebar.css';
+import { useMediaPredicate } from "react-media-hook";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardHeader from '@material-ui/core/CardHeader';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -22,6 +24,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import { getMonth, parseISO } from 'date-fns';
+import DoneIcon from '@material-ui/icons/Done';
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import CheckIcon from '@material-ui/icons/EventAvailable';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Container } from './styles';
@@ -65,11 +69,51 @@ function ColorlibStepIcon(props) {
   // }
   function getIcon(n) {
     // console.log(completed);
-    if (completed === true || active === true) {
-      return <CheckIcon />;
-    }
+    // if (completed === true || active === true) {
+    if (completed === true ) {
+      return <DoneIcon style={{fontSize:'29px'}} />;
+    }else{
 
-    return <EventBusyIcon />;
+
+      if(n === 0 ){
+        return <Typography>Jan</Typography>
+      }
+      if (n === 1 ){
+        return <Typography>Fev</Typography>
+      }
+      if (n === 2 ){
+        return <Typography>Mar</Typography>
+      }
+      if (n === 3 ){
+        return <Typography>Abr</Typography>
+      }
+      if (n === 4 ){
+        return <Typography>Mai</Typography>
+      }
+      if (n === 5 ){
+        return <Typography>Jun</Typography>
+      }
+      if (n === 6 ){
+        return <Typography>Jul</Typography>
+      }
+      if (n === 7 ){
+        return <Typography>Ago</Typography>
+      }
+      if (n === 8 ){
+        return <Typography>Set</Typography>
+      }
+      if (n === 9 ){
+        return <Typography>Out</Typography>
+      }
+      if (n === 10 ){
+        return <Typography>Nov</Typography>
+      }
+      if (n === 11 ){
+        return <Typography>Dez</Typography>
+      }
+    }
+  
+    // return <EventBusyIcon />;
 
     // return `${n + 1}`;
   }
@@ -223,18 +267,22 @@ const option = {
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 300,
+    minWidth: 310,
     minHeight: 200,
     padding: 0,
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#F9F9F9',
+    // backgroundColor: '#000'
   },
   gridItem: {
     // marginRight: 120,
     // margin: 'auto',
+    '@media (max-width:500px)': {   marginLeft:75 },
+    // '@media (min-width:1000px)': { width: 1000, height: 500 },
+  
   },
   divGrid: {
     flexGrow: 1,
-
+    marginTop:20,
   },
   grid: {
     padding: 0,
@@ -244,18 +292,65 @@ const useStyles = makeStyles({
     padding: 0,
     marginTop: 60,
     width: 1280,
+    '@media (max-width:900px)': { width: 810 },
     height: 200,
+  },
+  steppermobile: {
+    background: 'none',
+    padding: 0,
+    marginTop: 15,
+    marginLeft:25,
+    position: 'absolute',
+    width: 120,
+    height: 900,
   },
   header: {
     textAlign: 'center',
     fontStyle: 'normal',
     fontWeight: 'bold',
+    '@media (max-width:500px)': { fontSize:'24px' },
+    fontFamily: 'Red Hat Display',
+    // position: 'absolute',
+  },
+  placeitem: {
+    textAlign: 'right',
+    fontStyle: 'normal',
+     marginTop:15,
+    fontSize:'14px',
+    fontWeight: 'bold',
+    letterSpacing: '0.02em',
+    color: '#AEAEAE',
+    fontFamily: 'Red Hat Display',
+    // position: 'absolute',
+  },
+  placeitembottom: {
+    textAlign: 'left',
+    fontStyle: 'normal',
+    // fontWeight: 'bold',
+    marginTop:15,
+    fontSize:'14px',
+    letterSpacing: '0.02em',
+    color: '#AEAEAE',
+    fontFamily: 'Red Hat Display',
+    // position: 'absolute',
+  },
+  placeitembottomright: {
+    // textAlign: 'right',
+    float:'right',
+    
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    // marginTop:20,
+    fontSize:'14px',
+    letterSpacing: '0.02em',
+    color: '#AEAEAE',
     fontFamily: 'Red Hat Display',
     // position: 'absolute',
   },
   headerfaturamento: {
-    textAlign: 'left',
-    fontSize: '30px',
+    textAlign: 'center',
+    marginTop:15,
+    fontSize: '42px',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontFamily: 'Red Hat Display',
@@ -263,14 +358,15 @@ const useStyles = makeStyles({
   },
   midfaturamento: {
     fontFamily: 'Red Hat Display',
-
+    fontSize:'19px',
     fontWeight: 'bold',
     letterSpacing: '0.02em',
-    color: '#B4B4BB',
+    color: '#000',
   },
   midrevisoes: {
-    color: '#B4B4BB',
+    color: '#000',
     textAlign: 'left',
+    fontSize:'19px',
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '0.02em',
@@ -287,7 +383,8 @@ const useStyles = makeStyles({
     fontFamily: 'Red Hat Display',
   },
   midconversoes: {
-    color: '#B4B4BB',
+    color: '#000',
+    fontSize:'19px',
     textAlign: 'left',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -295,8 +392,9 @@ const useStyles = makeStyles({
     fontFamily: 'Red Hat Display',
   },
   midservices: {
-    color: '#B4B4BB',
+    color: '#000',
     textAlign: 'left',
+    fontSize:'19px',
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '0.02em',
@@ -368,7 +466,7 @@ const useStyles = makeStyles({
     borderRadius: '20px',
   },
   faturamentobar: {
-    backgroundColor: '#26B3C0',
+    backgroundColor: '#6AD1C9',
     borderRadius: '20px',
   },
   revisoes: {
@@ -402,6 +500,8 @@ const useStyles = makeStyles({
 });
 
 function Test() {
+  const biggerThan600 = useMediaPredicate("(min-width: 600px)");
+  const smallerThan600 = useMediaPredicate("(max-width: 599px)");
   const finalFormatted = useRecoilValue(dateFinal);
 
   function getSteps(active) {
@@ -429,7 +529,7 @@ function Test() {
   const classes = useStyles();
   const data = [
     {
-      title: 'Total Faturamento',
+      title: 'TOTAL FATURAMENTO',
       quarter: 1,
       earnings: 13000,
       progress: 80,
@@ -437,12 +537,12 @@ function Test() {
       header: classes.headerfaturamento,
       mid: classes.midfaturamento,
       linearbarclass: classes.faturamentobar,
-      valor: '10000,00',
+      valor: '10.000,00',
       icon: true,
       stepper: true,
     },
     {
-      title: 'Revisões',
+      title: 'REVISÕES',
       quarter: 2,
       earnings: 16500,
       progress: 10,
@@ -453,7 +553,7 @@ function Test() {
       valor: '7600',
     },
     {
-      title: 'Conversão de Pacotes',
+      title: 'CONVERSÃO DE PACOTE',
       quarter: 3,
       earnings: 14250,
       progress: 10,
@@ -464,7 +564,7 @@ function Test() {
       valor: '33%',
     },
     {
-      title: 'Serviços comuns',
+      title: 'SERVIÇOS COMUNS',
       quarter: 4,
       earnings: 19000,
       progress: 30,
@@ -495,6 +595,33 @@ function Test() {
           alignItems="flex-start"
           className={classes.grid}
         >
+          {smallerThan600 &&     <Stepper
+
+          classes={{root: classes.steppermobile}}
+          connector={
+            <StepConnector
+              classes={{
+                completed: { borderColor: "red" },
+                line: { borderColor: "red" }
+              }}
+              style={{marginTop:5,marginLeft:25}}
+            />
+          }
+          activeStep={activeStep}
+          orientation="vertical"
+        >
+                        {steps.map(label => (
+                         
+                          <Step>
+                            <StepLabel StepIconComponent={ColorlibStepIcon}>
+                              {/* {label} */}
+                            </StepLabel>
+                          </Step>
+                       
+                          
+                        ))}
+                    
+                      </Stepper>}
           {data.map(elem => (
             <Grid
               item
@@ -516,6 +643,16 @@ function Test() {
         </Typography> */}
                 {/* <Paper elevation={3} /> */}
                 <CardContent>
+                <Typography
+                      variant="h5"
+                      component="h5"
+                      className={elem.mid}
+                    
+                    >
+                      {elem.title}
+                      <AddCircleOutlineOutlinedIcon style={{float: 'right', alignSelf:'right',marginLeft:10, color:'#6AD1C9',fontSize:'27px'}}></AddCircleOutlineOutlinedIcon>
+                    </Typography>
+                    <Divider style={{marginTop:5}} />
                   <Typography
                     variant="h5"
                     component="h5"
@@ -523,13 +660,18 @@ function Test() {
                   >
                     {elem.valor}
                     {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
-                    <Typography
-                      variant="h5"
-                      component="h5"
-                      className={elem.mid}
-                    >
-                      {elem.title}
-                    </Typography>
+                  
+                    {/* {elem.stepper ? (
+                     
+                    ) : null} */}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    component="h5"
+                    className={classes.placeitem}
+                  >
+                    30% DA META
+                  
                     {/* {elem.stepper ? (
                      
                     ) : null} */}
@@ -542,6 +684,33 @@ function Test() {
                     }}
                     className={elem.linearclass}
                   />
+                  {/* <div style={{display:"flex"}}> */}
+                        <Typography
+                    variant="h5"
+                    component="h5"
+              
+                    className={classes.placeitembottom}
+                  >
+                    DESISTÊNCIAS
+                  
+                    {/* {elem.stepper ? (
+                     
+                    ) : null} */}
+                       <Typography
+                    variant="h5"
+                    component="h5"
+                    display="inline"
+                    className={classes.placeitembottomright}
+                  >
+                    75
+                                      {/* {elem.stepper ? (
+                     
+                    ) : null} */}
+                  </Typography>
+                  </Typography>
+                  
+                  {/* </div> */}
+                  <Divider style={{marginTop:1}} />
                   {/* <Paper /> */}
                 </CardContent>
               </Card>
@@ -549,7 +718,7 @@ function Test() {
             
           ))}
         </Grid>
-        
+        {biggerThan600 && 
         <Stepper
                         classes={{ root: classes.stepper }}
                         alternativeLabel
@@ -561,7 +730,7 @@ function Test() {
                          
                           <Step>
                             <StepLabel StepIconComponent={ColorlibStepIcon}>
-                              {label}
+                              {/* {label} */}
                             </StepLabel>
                           </Step>
                        
@@ -569,6 +738,7 @@ function Test() {
                         ))}
                     
                       </Stepper>
+}
       </div>
     </Container>
   );
