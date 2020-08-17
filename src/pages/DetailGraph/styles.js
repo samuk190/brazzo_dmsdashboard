@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
-  
+
   header {
     display: flex;
     align-self: center;
     align-items: center;
-    align
+
     button {
       border: 0;
       background: none;

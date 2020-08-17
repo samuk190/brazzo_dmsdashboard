@@ -3,6 +3,8 @@ import React from 'react';
 
 // import 'react-multilevel-sidebar/src/Sidebar.css';
 import 'echarts-gl';
+import { IconButton } from '@material-ui/core';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Typography from '@material-ui/core/Typography';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -21,6 +23,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { Container } from './styles';
+import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import TextRotateVerticalOutlinedIcon from '@material-ui/icons/TextRotateVerticalOutlined';
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 const useStyles = makeStyles({
   root: {
@@ -34,6 +38,7 @@ const useStyles = makeStyles({
   },
   titleroot: {
     marginRight: 90,
+    color:'#06A489',
   },
   rootfaturamento: {
     alignItems: 'center',
@@ -44,7 +49,7 @@ const useStyles = makeStyles({
     minHeight: 300,
     padding: 0,
     paddingLeft: 0,
-    backgroundColor: 'rgba(196, 196, 196, 0.2)',
+    // backgroundColor: 'rgba(196, 196, 196, 0.2)',
   },
   rootconversoes: {
     alignItems: 'center',
@@ -54,7 +59,7 @@ const useStyles = makeStyles({
     minHeight: 300,
     padding: 0,
     paddingLeft: 0,
-    backgroundColor: 'rgba(234, 177, 124, 0.2)',
+    // backgroundColor: 'rgba(234, 177, 124, 0.2)',
   },
   rootconsultores: {
     alignItems: 'center',
@@ -64,7 +69,8 @@ const useStyles = makeStyles({
     minHeight: 300,
     padding: 0,
     paddingLeft: 0,
-    backgroundColor: 'rgba(126, 234, 124, 0.2)',
+    
+    // backgroundColor: 'rgba(126, 234, 124, 0.2)',
   },
   list: {
     width: '100%',
@@ -436,7 +442,7 @@ function Utilization() {
         align="center"
         component="h4"
       >
-        RANKING <TrendingUpIcon fontSize="Large" />
+      <ArrowForwardIosIcon style={{marginBottom:5}} fontSize="Large" />  RANKING 
       </Typography>
       <div className={classes.divGrid}>
         <Grid
@@ -457,19 +463,9 @@ function Utilization() {
               key={data.indexOf(elem)}
               className={classes.gridItem}
             >
-              <Typography
-                align="center"
-                variant="h5"
-                component="h5"
-                className={elem.mid}
-              >
-                {elem.title}
-              </Typography>
-              <Typography variant="h4" component="h4" className={elem.header}>
-                {elem.valor}
-                {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
-              </Typography>
+             
               <Card className={elem.root}>
+                
                 <CardHeader
                   // title={elem.title}
                   titleStyle={classes.headingtitle}
@@ -481,7 +477,27 @@ function Utilization() {
                 {/* <Paper elevation={3} /> */}
 
                 <CardContent>
-                  <ListItem alignItems="flex-start" className={elem.list}>
+                <Typography
+                align="center"
+                variant="h5"
+                component="h5"
+                className={elem.mid}
+              >
+                {elem.title}
+              </Typography>
+              <Typography variant="h4" component="h4" className={elem.header}>
+                {elem.valor}
+                {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
+              </Typography>
+              <Divider style={{marginTop:5}}></Divider>
+              <IconButton size="small" style={{float:'right'}}>
+              <ArrowUpwardOutlinedIcon style={{ boxShadow: '0px 3.57955px 4.29545px rgba(0, 0, 0, 0.25)', marginTop:5, color:'#FFF',backgroundColor:'#06A489',fontSize:'36px', borderRadius:'25px',borderColor:'#155'}}></ArrowUpwardOutlinedIcon>
+              </IconButton>
+              <IconButton size="small"  style={{float:'right'}}>
+              <TextRotateVerticalOutlinedIcon style={{ marginTop:5,color:'#FFF',backgroundColor:'#06A489',fontSize:'36px',borderRadius:'25px',borderColor:'#155'}}></TextRotateVerticalOutlinedIcon>
+              </IconButton>
+                  <ListItem alignItems="flex-start" className={elem.list} > 
+                    
                     <ListItemAvatar>
                       <Avatar
                         className={elem.listavatar}

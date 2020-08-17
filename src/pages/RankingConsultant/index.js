@@ -3,6 +3,8 @@ import React from 'react';
 
 // import 'react-multilevel-sidebar/src/Sidebar.css';
 import 'echarts-gl';
+import { IconButton } from '@material-ui/core';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Typography from '@material-ui/core/Typography';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -21,6 +23,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { Container } from './styles';
+import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import TextRotateVerticalOutlinedIcon from '@material-ui/icons/TextRotateVerticalOutlined';
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 const useStyles = makeStyles({
   root: {
@@ -34,6 +38,7 @@ const useStyles = makeStyles({
   },
   titleroot: {
     marginRight: 90,
+    color:'#06A489',
   },
   rootfaturamento: {
     alignItems: 'center',
@@ -44,7 +49,7 @@ const useStyles = makeStyles({
     minHeight: 300,
     padding: 0,
     paddingLeft: 0,
-    backgroundColor: 'rgba(196, 196, 196, 0.2)',
+    // backgroundColor: 'rgba(196, 196, 196, 0.2)',
   },
   rootconversoes: {
     alignItems: 'center',
@@ -54,7 +59,7 @@ const useStyles = makeStyles({
     minHeight: 300,
     padding: 0,
     paddingLeft: 0,
-    backgroundColor: 'rgba(234, 177, 124, 0.2)',
+    // backgroundColor: 'rgba(234, 177, 124, 0.2)',
   },
   rootconsultores: {
     alignItems: 'center',
@@ -64,7 +69,8 @@ const useStyles = makeStyles({
     minHeight: 300,
     padding: 0,
     paddingLeft: 0,
-    backgroundColor: 'rgba(126, 234, 124, 0.2)',
+    
+    // backgroundColor: 'rgba(126, 234, 124, 0.2)',
   },
   list: {
     width: '100%',
@@ -77,6 +83,8 @@ const useStyles = makeStyles({
   },
   grid: {
     // marginLeft: 40,
+    alignContent:'center',
+    justifyContent:'center',
     alignSelf: 'center',
   },
   gridItem: {
@@ -88,6 +96,8 @@ const useStyles = makeStyles({
     flexGrow: 1,
     width: '100%',
     alignSelf: 'center',
+    justifyContent:'center',
+    justifyItems:'center',
     // paddingLeft: 100,
   },
 
@@ -344,7 +354,7 @@ const useStyles = makeStyles({
   },
 });
 
-function RankingConsultant() {
+function Utilization() {
   const classes = useStyles();
   // const profile = useSelector(state => state.user.profile);
   const data = [
@@ -377,16 +387,16 @@ function RankingConsultant() {
       stepper: false,
     },
     {
-      title: 'Consultores',
-      primary: 'Paula Machado',
-      secondary: 'Ricardo Emanuel',
-      third: 'Silva Ribeiro',
+      title: 'SERVIÇOS',
+      primary: 'Higienização',
+      secondary: 'Limpeza',
+      third: 'Limpeza TBI',
       avatarprimary:
-        'https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light',
+      'https://brazzo.com.br/wp-content/uploads/2020/05/0002_1350-034-Brazzo_Produto_Still_InterClean_500ml.png',
       avatarsecondary:
-        'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortFlat&accessoriesType=Prescription01&hairColor=Brown&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Hearts&eyebrowType=AngryNatural&mouthType=Vomit&skinColor=Tanned',
+      'https://brazzo.com.br/wp-content/uploads/2020/05/0002_1350-034-Brazzo_Produto_Still_InterClean_500ml.png',
       avatarthird:
-        'https://avataaars.io/?avatarStyle=Transparent&topType=WinterHat2&accessoriesType=Sunglasses&hatColor=Blue01&hairColor=Platinum&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=ShirtVNeck&clotheColor=Gray01&eyeType=Surprised&eyebrowType=RaisedExcitedNatural&mouthType=Eating&skinColor=Pale',
+      'https://brazzo.com.br/wp-content/uploads/2020/05/0002_1350-034-Brazzo_Produto_Still_InterClean_500ml.png',
 
       root: classes.rootconsultores,
       header: classes.headerrevisoes,
@@ -400,33 +410,7 @@ function RankingConsultant() {
       linearbarclass: classes.revisoesbar,
       valor: 'Conversões',
     },
-    {
-      title: 'Serviços',
-      primary: 'Higienização',
-      secondary: 'Limpeza TBI',
-      third: 'Verniz Motor',
-      avatarprimary:
-        'https://brazzo.com.br/wp-content/uploads/2020/05/0002_1350-034-Brazzo_Produto_Still_InterClean_500ml.png',
-      avatarsecondary:
-        'https://brazzo.com.br/wp-content/uploads/2020/05/0002_1350-034-Brazzo_Produto_Still_InterClean_500ml.png',
-      avatarthird:
-        'https://brazzo.com.br/wp-content/uploads/2020/05/0002_1350-034-Brazzo_Produto_Still_InterClean_500ml.png',
-      quarter: 3,
-      percent: 10,
-      listpercent: classes.conversoespercent,
-      earnings: 14250,
-      progress: 10,
-      root: classes.rootconversoes,
-      header: classes.headerconversoes,
-      mid: classes.midconversoes,
-
-      linearclass: classes.conversoes,
-      linearbarclass: classes.conversoesbar,
-      list: classes.listconversoes,
-      listitem: classes.listconversoesitem,
-      listavatar: classes.listconversoesavatar,
-      valor: 'Vendas',
-    },
+   
   ];
   return (
     <Container>
@@ -436,7 +420,7 @@ function RankingConsultant() {
         align="center"
         component="h4"
       >
-        RANKING <TrendingUpIcon fontSize="Large" />
+      <ArrowForwardIosIcon style={{marginBottom:5}} fontSize="Large" /> MEU RANKING 
       </Typography>
       <div className={classes.divGrid}>
         <Grid
@@ -457,19 +441,9 @@ function RankingConsultant() {
               key={data.indexOf(elem)}
               className={classes.gridItem}
             >
-              <Typography
-                align="center"
-                variant="h5"
-                component="h5"
-                className={elem.mid}
-              >
-                {elem.title}
-              </Typography>
-              <Typography variant="h4" component="h4" className={elem.header}>
-                {elem.valor}
-                {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
-              </Typography>
+             
               <Card className={elem.root}>
+                
                 <CardHeader
                   // title={elem.title}
                   titleStyle={classes.headingtitle}
@@ -481,7 +455,27 @@ function RankingConsultant() {
                 {/* <Paper elevation={3} /> */}
 
                 <CardContent>
-                  <ListItem alignItems="flex-start" className={elem.list}>
+                <Typography
+                align="center"
+                variant="h5"
+                component="h5"
+                className={elem.mid}
+              >
+                {elem.title}
+              </Typography>
+              <Typography variant="h4" component="h4" className={elem.header}>
+                {elem.valor}
+                {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
+              </Typography>
+              <Divider style={{marginTop:5}}></Divider>
+              <IconButton size="small" style={{float:'right'}}>
+              <ArrowUpwardOutlinedIcon style={{ boxShadow: '0px 3.57955px 4.29545px rgba(0, 0, 0, 0.25)', marginTop:5, color:'#FFF',backgroundColor:'#06A489',fontSize:'36px', borderRadius:'25px',borderColor:'#155'}}></ArrowUpwardOutlinedIcon>
+              </IconButton>
+              <IconButton size="small"  style={{float:'right'}}>
+              <TextRotateVerticalOutlinedIcon style={{ marginTop:5,color:'#FFF',backgroundColor:'#06A489',fontSize:'36px',borderRadius:'25px',borderColor:'#155'}}></TextRotateVerticalOutlinedIcon>
+              </IconButton>
+                  <ListItem alignItems="flex-start" className={elem.list} > 
+                    
                     <ListItemAvatar>
                       <Avatar
                         className={elem.listavatar}
@@ -552,4 +546,4 @@ function RankingConsultant() {
   );
 }
 
-export default RankingConsultant;
+export default Utilization;

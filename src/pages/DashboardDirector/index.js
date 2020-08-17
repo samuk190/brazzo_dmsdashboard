@@ -87,7 +87,7 @@ const useStyles = makeStyles({
   },
 });
 
-function DashboardManager() {
+function DashboardDirector() {
 //Dados dos cards
 const [arrayCollapse,setArrayCollapse] = React.useState([]);
 const classes = useStyles();
@@ -269,4 +269,4 @@ function changeArrayColapse(index) {
   );
 }
 
-export default DashboardManager;
+export default DashboardDirector;

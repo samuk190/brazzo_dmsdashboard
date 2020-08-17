@@ -2,6 +2,8 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import 'react-multilevel-sidebar/src/Sidebar.css';
+import 'fontsource-red-hat-display';
+
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
@@ -190,7 +192,7 @@ function Utilization() {
             itemStyle: {
               color:
                 elem.objective === elem.maxObjective
-                  ? '#00B001'
+                  ? '#80DAAB'
                   : elem.objective >= elem.targetObjective
                   ? '#ffcc00'
                   : '#E41001',
@@ -284,7 +286,7 @@ function Utilization() {
           itemStyle: {
             color:
               elem.objective === elem.maxObjective
-                ? '#00B001'
+                ? '#80DAAB'
                 : elem.objective >= elem.targetObjective
                 ? '#ffcc00'
                 : '#E41001',
@@ -399,7 +401,7 @@ function Utilization() {
                               <DriveEtaIcon>Concessionárias </DriveEtaIcon>
                             }
                           >
-                            Concessionárias
+                            Grupos
                           </Button>
 
                           <Button
@@ -420,8 +422,8 @@ function Utilization() {
                           <Grid item xs />
                         </Grid>
                         <Grid item>
-                          <Typography gutterBottom variant="subtitle1">
-                            Conversão
+                          <Typography style={{fontFamily: 'Red Hat Display', fontSize:'13px'}} gutterBottom variant="subtitle1">
+                            CONVERSÃO
                           </Typography>
                           <Typography variant="body2" gutterBottom>
                             <Box position="relative" display="inline-flex">
@@ -447,7 +449,7 @@ function Utilization() {
                                       }
                                     : value.objective < 3
                                     ? '#ffcc00'
-                                    : '#E41001'
+                                    : '#vDF2222'
                                 }
                               /> */}
                               <div style={{ width: 75, height: 75 }}>
@@ -463,7 +465,7 @@ function Utilization() {
                                     strokeLinecap: 'butt',
 
                                     // Text size
-                                    textSize: '24px',
+                                    textSize: '30px',
 
                                     // How long animation takes to go from one percentage to another, in seconds
                                     pathTransitionDuration: 0.5,
@@ -472,32 +474,32 @@ function Utilization() {
                                     // pathTransition: 'none',
 
                                     // Colors
-
+                                    
                                     textColor: `${
                                       value.objective === value.maxObjective
-                                        ? '#00B001'
+                                        ? '#80DAAB'
                                         : value.objective >
                                           value.targetObjective
                                         ? '#ffcc00'
-                                        : '#E41001'
+                                        : '#DF2222'
                                     }`,
 
                                     trailColor: '#d6d6d6',
                                     stroke: '#d6d6d6',
                                     pathColor: `${
                                       value.objective === value.maxObjective
-                                        ? '#00B001'
+                                        ? '#80DAAB'
                                         : value.objective >
                                           value.targetObjective
                                         ? '#ffcc00'
-                                        : '#E41001'
+                                        : '#DF2222'
                                     }`,
                                     // backgroundColor: `${
                                     //   value.objective > 4
-                                    //     ? '#00B001'
+                                    //     ? '#80DAAB'
                                     //     : value.objective > 3
                                     //     ? '#ffcc00'
-                                    //     : '#E41001'
+                                    //     : '#DF2222'
                                     // }`,
                                   })}
                                 />
@@ -541,7 +543,7 @@ function Utilization() {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title">
-              Concessionárias do grupo
+              Grupos
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -575,7 +577,7 @@ function Utilization() {
                               <Typography gutterBottom variant="subtitle1">
                                 {value.title}
                               </Typography>
-                              <Typography variant="body2" gutterBottom>
+                              <Typography style={{fontFamily: 'Red Hat Display'}} variant="body2" gutterBottom>
                                 BOTA FOGO
                               </Typography>
                               {/* <Button
@@ -667,7 +669,7 @@ function Utilization() {
 
                                         textColor: `${
                                           value.objective === value.maxObjective
-                                            ? '#00B001'
+                                            ? '#80DAAB'
                                             : value.objective >
                                               value.targetObjective
                                             ? '#ffcc00'
@@ -678,7 +680,7 @@ function Utilization() {
                                         stroke: '#d6d6d6',
                                         pathColor: `${
                                           value.objective === value.maxObjective
-                                            ? '#00B001'
+                                            ? '#80DAAB'
                                             : value.objective >
                                               value.targetObjective
                                             ? '#ffcc00'
