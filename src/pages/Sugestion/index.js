@@ -27,12 +27,7 @@ import { format } from 'date-fns';
 import Pdf from 'react-to-pdf';
 import logo from '../../assets/logo.png';
 
-import {
-  dateInitial,
-  dateFinal,
-  dateInitialFormatted,
-  dateFinalFormatted,
-} from '../../atoms/state';
+
 import { Container } from './styles';
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 const useStyles = makeStyles(theme => ({
@@ -138,8 +133,8 @@ const CustomTableCell = ({ row, name, onChange, index }) => {
 function Sugestion() {
   // const [initialDate, setInitialDate] = useRecoilState(dateInitial);
   // const [finalDate, setFinalDate] = useRecoilState(dateFinal);
-  const initialFormatted = useRecoilValue(dateInitialFormatted);
-  const finalFormatted = useRecoilValue(dateFinalFormatted);
+  // const initialFormatted = useRecoilValue(dateInitialFormatted);
+  // const finalFormatted = useRecoilValue(dateFinalFormatted);
 
   const componentRef = useRef('');
   const [rows, setRows] = React.useState([

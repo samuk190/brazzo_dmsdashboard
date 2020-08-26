@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { format } from 'date-fns';
+import { format,isAfter } from 'date-fns';
 import api from '~/services/api';
 
 export const textState = atom({
@@ -81,12 +81,21 @@ export const dateInitialFormatted = selector({
   }, // unique ID (with respect to other atoms/selectors)
   get: ({ get }) => {
     const date = get(dateInitial);
-    console.log(date);
+    const dateFinal = get(dateFinal);
+    if(isAfter(date,dateFinal)) {
+      alert('A data inicial não pode ultrapassar a data final!');
+    }else{
+      return date;
+    }
     // return date;
 
-    return format(new Date(date), 'dd/MM/yyyy');
+    // return format(new Date(date), 'dd/MM/yyyy');
   },
-});
+  // set: ({set}) => {
+  //   const date = set(dateInitial);
+  //   return date;
+  // }
+}); 
 
 export const dateFinal = atom({
   key: 'dateFinal',
@@ -105,6 +114,7 @@ export const dateFinalFormatted = selector({
   // unique ID (with respect to other atoms/selectors)
   get: ({ get }) => {
     const date = get(dateFinal);
+
     return format(new Date(date), 'dd/MM/yyyy');
 
     // return date;

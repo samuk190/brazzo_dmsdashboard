@@ -112,18 +112,21 @@ const useStyles = makeStyles({
     // position: 'absolute',
   },
   headerfaturamento: {
-    fontSize: '15px',
+    fontSize: '22px',
+    fontWeight: 'normal',
     fontStyle: 'normal',
 
     fontFamily: 'Roboto',
     color: '#000',
 
-    textAlign: 'center',
+    textAlign: 'left',
   },
   listfaturamento: {
     // padding: 0,
     paddingLeft: 0,
+    border:'1px solid #9E9E9E',
   },
+  
   listfaturamentoitem: {
     fontSize: '25px',
     width: 200,
@@ -138,9 +141,11 @@ const useStyles = makeStyles({
   midfaturamento: {
     fontFamily: 'Roboto',
     marginLeft: 0,
-    fontSize: '25px',
+    marginTop: -12,
+    fontSize: '30px',
+    fontWeight:'bold',
     letterSpacing: '0.02em',
-    color: '#000',
+    color: '#4E4E4E',
   },
   faturamentopercent: {
     fontSize: '40px',
@@ -157,31 +162,33 @@ const useStyles = makeStyles({
     marginTop: 10,
   },
   midrevisoes: {
-    color: '#000',
-    textAlign: 'center',
-    fontStyle: 'normal',
-
-    letterSpacing: '0.02em',
     fontFamily: 'Roboto',
+    marginLeft: 0,
+    marginTop: -12,
+    fontSize: '30px',
+    fontWeight:'bold',
+    letterSpacing: '0.02em',
+    color: '#4E4E4E',
   },
   headerrevisoes: {
-    fontSize: '15px',
+    fontSize: '22px',
+    fontWeight: 'normal',
     fontStyle: 'normal',
 
     fontFamily: 'Roboto',
     color: '#000',
 
-    textAlign: 'center',
+    textAlign: 'left',
   },
 
   midconversoes: {
-    textAlign: 'center',
-    color: '#000',
-
-    fontStyle: 'normal',
-
-    letterSpacing: '0.02em',
     fontFamily: 'Roboto',
+    marginLeft: 0,
+    marginTop: -12,
+    fontSize: '30px',
+    fontWeight:'bold',
+    letterSpacing: '0.02em',
+    color: '#4E4E4E',
   },
   midservices: {
     color: '#000',
@@ -194,6 +201,7 @@ const useStyles = makeStyles({
   listconversoes: {
     // padding: 0,
     paddingLeft: 0,
+    border:'1px solid #9E9E9E',
   },
   listconversoesitem: {
     fontSize: '25px',
@@ -221,18 +229,20 @@ const useStyles = makeStyles({
     height: '70px',
   },
   headerconversoes: {
-    fontSize: '15px',
+    fontSize: '22px',
+    fontWeight: 'normal',
     fontStyle: 'normal',
 
     fontFamily: 'Roboto',
     color: '#000',
 
-    textAlign: 'center',
+    textAlign: 'left',
   },
 
   listconsultores: {
     // padding: 0,
     paddingLeft: 0,
+    border:'1px solid #9E9E9E',
   },
   listconsultoresitem: {
     fontSize: '25px',
@@ -355,7 +365,7 @@ function Utilization() {
   // const profile = useSelector(state => state.user.profile);
   const data = [
     {
-      title: 'Produtos',
+      title: 'PRODUTOS',
       primary: 'Kit Lubrificantes',
       secondary: 'Verniz Motor',
       third: 'Inter Clean',
@@ -374,7 +384,7 @@ function Utilization() {
       header: classes.headerfaturamento,
       mid: classes.midfaturamento,
       linearbarclass: classes.faturamentobar,
-      valor: 'Vendas',
+      valor: 'VENDAS',
       list: classes.listfaturamento,
       listitem: classes.listfaturamentoitem,
       listavatar: classes.listfaturamentoavatar,
@@ -383,7 +393,7 @@ function Utilization() {
       stepper: false,
     },
     {
-      title: 'Consultores',
+      title: 'CONSULTORES',
       primary: 'Paula Machado',
       secondary: 'Ricardo Emanuel',
       third: 'Silva Ribeiro',
@@ -404,10 +414,10 @@ function Utilization() {
       listavatar: classes.listconsultoresavatar,
       linearclass: classes.revisoes,
       linearbarclass: classes.revisoesbar,
-      valor: 'Conversões',
+      valor: 'CONVERSÕES',
     },
     {
-      title: 'Serviços',
+      title: 'SERVIÇOS',
       primary: 'Higienização',
       secondary: 'Limpeza TBI',
       third: 'Verniz Motor',
@@ -431,7 +441,7 @@ function Utilization() {
       list: classes.listconversoes,
       listitem: classes.listconversoesitem,
       listavatar: classes.listconversoesavatar,
-      valor: 'Vendas',
+      valor: 'VENDAS',
     },
   ];
   return (
@@ -477,25 +487,28 @@ function Utilization() {
                 {/* <Paper elevation={3} /> */}
 
                 <CardContent>
-                <Typography
-                align="center"
+            
+              <Typography variant="h4" component="h4" className={elem.header}>
+                {elem.valor}
+                {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
+              </Typography>
+              <Typography
+                align="left"
                 variant="h5"
                 component="h5"
                 className={elem.mid}
               >
                 {elem.title}
-              </Typography>
-              <Typography variant="h4" component="h4" className={elem.header}>
-                {elem.valor}
-                {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
-              </Typography>
-              <Divider style={{marginTop:5}}></Divider>
-              <IconButton size="small" style={{float:'right'}}>
-              <ArrowUpwardOutlinedIcon style={{ boxShadow: '0px 3.57955px 4.29545px rgba(0, 0, 0, 0.25)', marginTop:5, color:'#FFF',backgroundColor:'#06A489',fontSize:'36px', borderRadius:'25px',borderColor:'#155'}}></ArrowUpwardOutlinedIcon>
+                 <IconButton size="small" style={{float:'right'}}>
+              <ArrowUpwardOutlinedIcon style={{ boxShadow: '0px 3.57955px 4.29545px rgba(0, 0, 0, 0.25)', marginTop:0, color:'#FFF',backgroundColor:'#06A489',fontSize:'33px', borderRadius:'25px',borderColor:'#155'}}></ArrowUpwardOutlinedIcon>
               </IconButton>
               <IconButton size="small"  style={{float:'right'}}>
-              <TextRotateVerticalOutlinedIcon style={{ marginTop:5,color:'#FFF',backgroundColor:'#06A489',fontSize:'36px',borderRadius:'25px',borderColor:'#155'}}></TextRotateVerticalOutlinedIcon>
+              <TextRotateVerticalOutlinedIcon style={{ marginTop:0,color:'#FFF',backgroundColor:'#06A489',fontSize:'33px',borderRadius:'25px',borderColor:'#155'}}></TextRotateVerticalOutlinedIcon>
               </IconButton>
+              </Typography>
+              
+              <Divider style={{marginTop:-2, height:2, color:'#A3A3A3'}}></Divider>
+             
                   <ListItem alignItems="flex-start" className={elem.list} > 
                     
                     <ListItemAvatar>

@@ -32,8 +32,8 @@ const useStyles = makeStyles({
     // justifySelf: 'center',
     // color:'#06A489',
     // fontFamily: 'Red Hat Display',
-    minWidth: 250,
-    maxWidth: 400,
+    minWidth: 300,
+    maxWidth: 450,
     minHeight: 100,
     padding: 0,
     margin: 0,
@@ -57,6 +57,7 @@ const useStyles = makeStyles({
   },
   headerfaturamento: {
     fontFamily:'Red Hat Display',
+    letterSpacing:2,
     color: '#4E4E4E',
     marginTop:10,
     fontSize:'20px',
@@ -67,6 +68,7 @@ const useStyles = makeStyles({
   },
   midfaturamento: {
     color: '#24AE96',
+    letterSpacing:3,
     fontSize: '40px',
     textShadow: '-2px -2px -4px rgba(0,0,0,0.25)',
     // alignSelf:'center',
@@ -146,12 +148,12 @@ const option = {
     right: 10,
     bottom: 20,
   },
-
+  grid: {show: true},
   color: '#24AE96',
   xAxis: {
     // backgroundColor: '#24AE96',
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: ['Jan', 'Fev', 'Mar', 'Mai', 'Ago']
   },
   yAxis: {
       type: 'value'
@@ -248,10 +250,11 @@ function changeArrayColapse(index) {
                
                   
                   <Collapse in={arrayCollapse[index] && arrayCollapse[index].active} timeout="auto" unmountOnExit> 
+                  <h4 style={{marginTop:10,marginBottom:-50, alignSelf:'center'}}>Gráfico Linha</h4>
                   <ReactEcharts
                       // theme="dark"
                       option={option}
-                      style={{ padding:0,margin:0,height: '200px', width: '100%' }}
+                      style={{padding:0,margin:0,marginLeft:10,height: '200px', width: '100%' }}
                       className="react_for_echarts"
         />
                   <IconButton onClick={() => changeArrayColapse(index)} align="center">

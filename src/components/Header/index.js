@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
 import './index.css';
+import {isAfter,format} from 'date-fns';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
@@ -126,6 +127,8 @@ const useStyles = makeStyles(theme => ({
 
 function Header() {
   const [values, setValues] = useRecoilState(searchFilter);
+  const [initialDate, setInitialDate] = useRecoilState(dateInitial);
+  const [finalDate, setFinalDate] = useRecoilState(dateFinal);
   const [selectedFilter, setSelectedFilter] = useRecoilState(selectedFilters);
 
   const handleClickShowPassword = () => {
@@ -334,14 +337,28 @@ function Header() {
   //         : theme.typography.fontWeightMedium,
   //   };
   // }
-  const [initialDate, setInitialDate] = useRecoilState(dateInitial);
-  const [finalDate, setFinalDate] = useRecoilState(dateFinal);
+
 
   const handleDateChange = date => {
-    setInitialDate(date);
+    // setInitialDate(date);
+
+    
+    if(isAfter(date,new Date(finalDate))){
+      alert('A data inicial não pode ultrapassar a data final!')
+    }else{
+      setInitialDate(date);
+    }
   };
+    //case date final < date initial
+ 
   const handleDateChangeFinal = date => {
-    setFinalDate(date);
+    //case date final < date initial
+    if(isAfter(new Date(initialDate),date)){
+      alert('A data final não pode ser inferior a data inicial!')
+    }else{
+      setFinalDate(date);
+    }
+   
   };
   // const styleSearch = {
   //   color: '#909090',

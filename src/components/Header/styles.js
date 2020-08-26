@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 
 export const Container = styled.div`
-  /* background: #d2d8e2; */
-  background: linear-gradient(
+  background: #5A8E84;
+  /* background: linear-gradient(
     -120deg,
     rgba(26, 48, 68, 0.6),
     rgba(26, 48, 68, 0.7),
     rgba(26, 48, 68, 0.6)
-  );
+  ); */
   /* background: linear-gradient(-120deg, #1e2734, rgba(26, 48, 68, 0.7), #1e2734); */
   /* background: #1e2734; */
   padding: 0 30px;

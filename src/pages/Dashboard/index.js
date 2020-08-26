@@ -4,6 +4,10 @@ import ReactEcharts from 'echarts-for-react';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 import { shadows } from '@material-ui/system';
+import { Modal } from 'react-bootstrap';
+import Skeleton from 'react-loading-skeleton';
+
+import { IconButton } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import { Grid } from '@material-ui/core/';
 import clsx from 'clsx';
@@ -11,6 +15,8 @@ import Divider from '@material-ui/core/Divider';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import StepConnector from '@material-ui/core/StepConnector';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import CardContent from '@material-ui/core/CardContent';
 // import '~/pages/Ticket/node_modules/react-multilevel-sidebar/src/Sidebar.css';
 import { useMediaPredicate } from "react-media-hook";
@@ -524,7 +530,20 @@ function Dashboard() {
   const biggerThan600 = useMediaPredicate("(min-width: 600px)");
   const smallerThan600 = useMediaPredicate("(max-width: 599px)");
   const finalFormatted = useRecoilValue(dateFinal);
+  const [value, setValue] = React.useState(0);
+  const [showModal, setShowModal] = useState(false);
+  async function handleShowModal(value) {
+    // await getBrandData(value.id);
+    // setGraphData(value);
+    setShowModal(true);
 
+    // await getBrandData(value.id);
+
+    return value;
+  }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   function getSteps(active) {
     const number = getMonth(new Date(finalFormatted));
 
@@ -551,6 +570,7 @@ function Dashboard() {
   const data = [
     {
       title: 'TOTAL FATURAMENTO',
+      loading: false,
       quarter: 1,
       earnings: 13000,
       progress: 80,
@@ -565,6 +585,7 @@ function Dashboard() {
     {
       title: 'REVISÕES',
       quarter: 2,
+      loading: false,
       earnings: 16500,
       progress: 10,
       header: classes.headerrevisoes,
@@ -576,6 +597,7 @@ function Dashboard() {
     {
       title: 'CONVERSÃO DE PACOTE',
       quarter: 3,
+      loading: false,
       earnings: 14250,
       progress: 10,
       header: classes.headerconversoes,
@@ -587,6 +609,7 @@ function Dashboard() {
     {
       title: 'SERVIÇOS COMUNS',
       quarter: 4,
+      loading: false,
       earnings: 19000,
       progress: 30,
       header: classes.headerservices,
@@ -667,8 +690,11 @@ function Dashboard() {
                       className={elem.mid}
                     
                     >
+                      
                       {elem.title}
-                      <AddCircleOutlineOutlinedIcon style={{float: 'right', alignSelf:'right',marginLeft:10, color:'#6AD1C9',fontSize:'27px'}}></AddCircleOutlineOutlinedIcon>
+                      <IconButton  onClick={() => handleShowModal(elem)}  size="small" style={{float:'right', alignSelf:'right',fontSize:'25px'}}>
+                      <AddCircleOutlineOutlinedIcon style={{float: 'right', color:'#6AD1C9',fontSize:'25px'}}></AddCircleOutlineOutlinedIcon>
+                      </IconButton>
                     </Typography>
                     <Divider style={{marginTop:5}} />
                   <Typography
@@ -677,8 +703,9 @@ function Dashboard() {
                     className={elem.header}
                     
                   >
-                    {elem.valor}
-                    {elem.icon ? <TrendingUpIcon fontSize="large" /> : null}
+                    <Skeleton width={'100%'}></Skeleton>
+                    {/* {elem.valor} */}
+                    {/* {elem.icon ? <TrendingUpIcon fontSize="large" /> : null} */}
                   
                     {/* {elem.stepper ? (
                      
@@ -689,20 +716,21 @@ function Dashboard() {
                     component="h5"
                     className={classes.placeitem}
                   >
-                    30% DA META
-                  
+                    {/* 30% DA META */}
+                    <Skeleton width={'20%'}></Skeleton>
                     {/* {elem.stepper ? (
                      
                     ) : null} */}
                   </Typography>
-                  <LinearProgress
+                  <Skeleton width={'100%'}></Skeleton>
+                  {/* <LinearProgress
                     variant="determinate"
                     value={elem.progress}
                     classes={{
                       barColorPrimary: elem.linearbarclass,
                     }}
                     className={elem.linearclass}
-                  />
+                  /> */}
                   {/* <div style={{display:"flex"}}> */}
                         <Typography
                     variant="h5"
@@ -710,8 +738,8 @@ function Dashboard() {
               
                     className={classes.placeitembottom}
                   >
-                    DESISTÊNCIAS
-                  
+                    {/* DESISTÊNCIAS */}
+                    <Skeleton style={{float:'right'}} width={'30%'}></Skeleton>
                     {/* {elem.stepper ? (
                      
                     ) : null} */}
@@ -721,15 +749,16 @@ function Dashboard() {
                     display="inline"
                     className={classes.placeitembottomright}
                   >
-                    75
-                                      {/* {elem.stepper ? (
+                    {/* 75 */}
+                    <Skeleton width={'100%'}></Skeleton>
+                                {/* {elem.stepper ? (
                      
                     ) : null} */}
                   </Typography>
                   </Typography>
                   
                   {/* </div> */}
-                  <Divider style={{marginTop:1}} />
+                  {/* <Divider style={{marginTop:1}} /> */}
                   {/* <Paper /> */}
                 </CardContent>
               </Card>
@@ -762,8 +791,93 @@ function Dashboard() {
                       </Stepper>
 }
       </div>
+      <Modal
+          show={showModal}
+          size="xl"
+          onHide={() => setShowModal(false)}
+          dialogClassName="modal-90w"
+          aria-labelledby="example-custom-modal-styling-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-custom-modal-styling-title">
+              Gráfico Marca:
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+            >
+              <Tab
+                label="Gráfico em Barras/Linhas"
+                // icon={<BarChart />}
+                {...a11yProps(0)}
+              />
+              <Tab
+                label="Gráfico em Pie"
+                // icon={<ShowChart />}
+                {...a11yProps(1)}
+              />
+              <Tab label="Detalhes" {...a11yProps(2)} />
+            </Tabs>
+            {/* <p>Gráfico em Barras</p> */}
+            <TabPanel value={value} index={0}>
+              {/* {getOption(2)} */}
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              {/* {getOption(2)} */}
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              {/* {getOption(2)} */}
+            </TabPanel>
+          </Modal.Body>
+        </Modal>
     </Container>
   );
 }
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {/* {value === index && value === 0 && (
+        <ReactEcharts
+          // option={children}
+          style={{ height: '500px', width: '100%' }}
+          className="react_for_echarts"
+        />
+      )}
+      {value === index && value === 1 && (
+        <ReactEcharts
+          // option={children}
+          style={{ height: '500px', width: '100%' }}
+          className="react_for_echarts"
+        />
+      )} */}
+    </div>
+  );
+}
+// TabPanel.propTypes = {
+//   // eslint-disable-next-line react/require-default-props
+//   children: PropTypes.node,
+//   // eslint-disable-next-line react/forbid-prop-types
+//   index: PropTypes.any.isRequired,
+//   // eslint-disable-next-line react/forbid-prop-types
+//   value: PropTypes.any.isRequired,
+// };
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 export default Dashboard;

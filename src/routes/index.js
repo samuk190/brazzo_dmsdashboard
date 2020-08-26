@@ -7,7 +7,7 @@ import Dashboard from '../pages/Dashboard';
 import DashboardConsultant from '../pages/DashboardConsultant';
 import DashboardManager from '../pages/DashboardManager';
 import DashboardDirector from '../pages/DashboardDirector';
-
+import DetailGraph from '../pages/DetailGraph';
 import Main from '../pages/Main';
 import Utilization from '../pages/Utilization';
 import Sugestion from '../pages/Sugestion';
@@ -26,6 +26,8 @@ export default function Routes() {
       <Route path="/cdashboard"  component={DashboardConsultant} isPrivate />
       <Route path="/ddashboard"  component={DashboardDirector} isPrivate />
       <Route path="/cranking" component={RankingConsultant} isPrivate />
+      <Route path="/detail"  component={DetailGraph} isPrivate />
+
       {/* <Route path="/test" component={Test} isPrivate /> */}
       <Route path="/ranking" component={Ranking} isPrivate />
    

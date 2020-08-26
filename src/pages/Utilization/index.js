@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import 'react-multilevel-sidebar/src/Sidebar.css';
+// import 'react-multilevel-sidebar/src/Sidebar.css';
 import 'fontsource-red-hat-display';
 
 // const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
