@@ -36,7 +36,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import CheckIcon from '@material-ui/icons/EventAvailable';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Container } from './styles';
-
+import ReactTooltip from "react-tooltip";
 import {
   dateInitial,
   dateFinal,
@@ -343,6 +343,7 @@ const useStyles = makeStyles({
     fontStyle: 'normal',
     // fontWeight: 'bold',
     marginTop:5,
+
     fontSize:'14px',
     letterSpacing: '0.02em',
     color: '#AEAEAE',
@@ -570,6 +571,7 @@ function Dashboard() {
   const data = [
     {
       title: 'TOTAL FATURAMENTO',
+      datatip: 'Média Nacional: 20 <br /> Média do Período: 10',
       loading: false,
       quarter: 1,
       earnings: 13000,
@@ -630,7 +632,8 @@ function Dashboard() {
       {/* <Typography variant="h4" component="h4">
         GERAL
       </Typography> */}
-      <div className={classes.divGrid}>
+          
+      <div className={classes.divGrid} >
         <Grid
           container
           spacing={4}
@@ -673,7 +676,15 @@ function Dashboard() {
               key={data.indexOf(elem)}
               className={classes.gridItem}
             >
-              <Card className={classes.root}>
+              <Card className={classes.root}  data-for="main"
+              data-tip={elem.datatip}
+              data-iscapture="true">
+              <ReactTooltip
+            id="main"
+            place="top"
+            type="light"
+            multiline={true}
+          />
                 <CardHeader
                   // title={elem.title}
                   titleStyle={classes.headingtitle}
@@ -703,11 +714,11 @@ function Dashboard() {
                     className={elem.header}
                     
                   >
-                    <Skeleton width={'100%'}></Skeleton>
-                    {/* {elem.valor} */}
-                    {/* {elem.icon ? <TrendingUpIcon fontSize="large" /> : null} */}
+                   
+      {elem.loading ?  <Skeleton width={'100%'} /> :  <> {elem.valor}  {elem.icon ? <TrendingUpIcon fontSize="large" /> : null } </>
                   
-                    {/* {elem.stepper ? (
+                  
+                    /* {elem.stepper ? (
                      
                     ) : null} */}
                   </Typography>
@@ -716,21 +727,23 @@ function Dashboard() {
                     component="h5"
                     className={classes.placeitem}
                   >
-                    {/* 30% DA META */}
-                    <Skeleton width={'20%'}></Skeleton>
+                     {elem.loading ?    <Skeleton width={'20%'}></Skeleton> : '30% DA META'}
+                    {/*  */}
+                 
                     {/* {elem.stepper ? (
                      
                     ) : null} */}
                   </Typography>
-                  <Skeleton width={'100%'}></Skeleton>
-                  {/* <LinearProgress
+                  {elem.loading ?     <Skeleton width={'100%'}></Skeleton> :    <LinearProgress
                     variant="determinate"
                     value={elem.progress}
                     classes={{
                       barColorPrimary: elem.linearbarclass,
                     }}
                     className={elem.linearclass}
-                  /> */}
+                  /> }
+              
+               
                   {/* <div style={{display:"flex"}}> */}
                         <Typography
                     variant="h5"
@@ -738,27 +751,18 @@ function Dashboard() {
               
                     className={classes.placeitembottom}
                   >
-                    {/* DESISTÊNCIAS */}
-                    <Skeleton style={{float:'right'}} width={'30%'}></Skeleton>
-                    {/* {elem.stepper ? (
-                     
-                    ) : null} */}
-                       <Typography
+                   {elem.loading ? <Skeleton style={{float:'right'}} width={'30%'}></Skeleton> : 'DESISTÊNCIAS' }
+                          <Typography
                     variant="h5"
                     component="h5"
                     display="inline"
                     className={classes.placeitembottomright}
                   >
-                    {/* 75 */}
-                    <Skeleton width={'100%'}></Skeleton>
-                                {/* {elem.stepper ? (
-                     
-                    ) : null} */}
+                      {elem.loading ?  <Skeleton width={'100%'}></Skeleton> :'75' }
                   </Typography>
                   </Typography>
-                  
                   {/* </div> */}
-                  {/* <Divider style={{marginTop:1}} /> */}
+                  {elem.loading ? <Divider style={{marginTop:1}} /> : null }
                   {/* <Paper /> */}
                 </CardContent>
               </Card>

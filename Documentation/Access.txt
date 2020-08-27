@@ -1,0 +1,9 @@
+Acessos e instruções para modificação do código fonte.
+
+Dashboard Gestor Comercial
+Dashboard -> /dashboard -> Dashboard -> index.js
+
+Dashboard Consultor
+
+DashboardConsultantt -> /cdashboard -> DashboardConsultant -> index.js
+
