@@ -36,6 +36,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import CheckIcon from '@material-ui/icons/EventAvailable';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Container } from './styles';
+import DetailGraph from '../../components/DetailGraph';
 import ReactTooltip from "react-tooltip";
 import {
   dateInitial,
@@ -827,6 +828,7 @@ function Dashboard() {
             </Tabs>
             {/* <p>Gráfico em Barras</p> */}
             <TabPanel value={value} index={0}>
+          
               {/* {getOption(2)} */}
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -837,6 +839,7 @@ function Dashboard() {
             </TabPanel>
           </Modal.Body>
         </Modal>
+     
     </Container>
   );
 }
@@ -852,20 +855,12 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {/* {value === index && value === 0 && (
-        <ReactEcharts
-          // option={children}
-          style={{ height: '500px', width: '100%' }}
-          className="react_for_echarts"
-        />
-      )}
-      {value === index && value === 1 && (
-        <ReactEcharts
-          // option={children}
-          style={{ height: '500px', width: '100%' }}
-          className="react_for_echarts"
-        />
-      )} */}
+        {value === index && value === 0 && (
+     <DetailGraph>
+
+     </DetailGraph>
+      )} 
+     
     </div>
   );
 }

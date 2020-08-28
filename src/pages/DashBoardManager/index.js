@@ -19,7 +19,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Typography from '@material-ui/core/Typography';
-import { findAllByDisplayValue } from '@testing-library/react';
 const useStyles = makeStyles({
   divGrid: {
     // alignSelf:'center',
@@ -54,6 +53,15 @@ const useStyles = makeStyles({
     marginBottom:-15,
     fontSize:'25px',
     fontFamily: 'Red Hat Display',
+  },
+  subtitlerootConsultant: {
+     // marginRight: 90,
+     color:'#06A489',
+     margin: 0,
+     marginTop:50,
+     marginBottom:-15,
+     fontSize:'25px',
+     fontFamily: 'Red Hat Display',
   },
   headerfaturamento: {
     fontFamily:'Red Hat Display',
@@ -93,6 +101,26 @@ function DashboardManager() {
 //Dados dos cards
 const [arrayCollapse,setArrayCollapse] = React.useState([]);
 const classes = useStyles();
+const dataConsultant = [
+  {
+    title: 'Incentivo Total Pago',
+    header: classes.headerfaturamento,
+    mid: classes.midfaturamento,
+    linearbarclass: classes.faturamentobar,
+    valor: '121',
+    icon: true,
+ 
+  },
+  {
+    title: 'Incentivo Médio',
+    header: classes.headerfaturamento,
+    mid: classes.midfaturamento,
+    linearbarclass: classes.faturamentobar,
+    valor: '12%',
+    icon: true,
+ 
+  }
+];
 const data = [
   {
     title: 'Vendas Realizadas',
@@ -267,6 +295,88 @@ function changeArrayColapse(index) {
             </Grid>
           )})}
         </Grid>
+       
+      </div>
+      <Typography
+          className={classes.subtitlerootConsultant}
+          variant="span"
+          align="center"
+          component="span"
+        >
+          Dados dos Consultores
+          </Typography>
+          <div className={classes.divGrid}>
+        <Grid
+          container
+          spacing={4}
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+          className={classes.grid}
+        >
+          {dataConsultant.map(function(elem,index,arrayobject) {  return (
+            <Grid
+              item
+              spacing={3}
+              xs="auto"
+              sm="auto"
+              md="auto"
+              key={data.indexOf(elem)}
+              className={classes.gridItem}
+            >
+              <Card className={classes.root}>
+                {/* <CardHeader
+                  // title={elem.title}
+                  titleStyle={classes.headingtitle}
+                  className={classes.heading}
+                /> */}
+                {/* <Typography variant="h5" component="h5">
+          Gráfico Fatia
+        </Typography> */}
+                {/* <Paper elevation={3} /> */}
+                <CardContent className={classes.card} align="center">
+                <Typography
+                      variant="h5"
+                      component="h5"
+                      className={classes.headerfaturamento}
+                    >
+                      {elem.title}
+                    </Typography>
+                    <Divider style={{height:2, color:'#A3A3A3'}}/>
+                  <Typography
+                    variant="h5"
+                    component="h5"
+                    className={classes.midfaturamento}
+                  >
+                    {elem.valor}
+                  
+            
+                   
+                  </Typography>
+                  {arrayCollapse[index] && arrayCollapse[index].active ? '' :  (    <IconButton onClick={() => changeArrayColapse(index)} size="medium" style={{border:'2px solid #24AE96',backgroundColor:'#24AE96',justifyContent:'center',alignItems:'center', borderRadius:30, position:'absolute', marginLeft:50, marginTop:0, color:'#FFF', width:50,height:50}}>
+                  <BarChartIcon style={{ marginTop:-10,width:'40px',height: '100%'}}></BarChartIcon>
+                  </IconButton>)} 
+               
+                  
+                  <Collapse in={arrayCollapse[index] && arrayCollapse[index].active} timeout="auto" unmountOnExit> 
+                  <h4 style={{marginTop:10,marginBottom:-50, alignSelf:'center'}}>Gráfico Linha</h4>
+                  <ReactEcharts
+                      // theme="dark"
+                      option={option}
+                      style={{padding:0,margin:0,marginLeft:10,height: '200px', width: '100%' }}
+                      className="react_for_echarts"
+        />
+                  <IconButton onClick={() => changeArrayColapse(index)} align="center">
+                  <KeyboardArrowUpIcon></KeyboardArrowUpIcon>
+                  </IconButton>
+                  </Collapse>
+            
+                </CardContent>
+              </Card>
+            </Grid>
+          )})}
+        </Grid>
+       
       </div>
     </Container>
   );
