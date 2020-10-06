@@ -5,7 +5,7 @@ import Route from './Route';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
 import DashboardConsultant from '../pages/DashboardConsultant';
-import DashboardManager from '../pages/DashboardManager';
+import DashboardManager from '../pages/DashBoardManager';
 import DashboardDirector from '../pages/DashboardDirector';
 import DetailGraph from '../pages/DetailGraph';
 import Main from '../pages/Main';
